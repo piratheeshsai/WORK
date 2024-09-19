@@ -1,0 +1,147 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    background: linear-gradient(to bottom, #8ab2cf, #edebf0); /* Light blue to violet gradient */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #535685;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+
+}
+.content {
+    flex: 1; /* Allow content to expand and push footer down */
+}
+
+
+/* Base styles for the login container */
+.login-container {
+    max-width: 100%; /* Full width but limited by max-width */
+    width: 100%;
+    max-width: 350px; /* Set max-width for larger screens */
+    margin: 0 auto; /* Center align horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for better visual */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 576px) {
+    .login-container {
+        max-width: 90%; /* Adjust width for small screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (min-width: 768px) {
+    .login-container {
+        max-width: 350px; /* Increase max-width for medium screens */
+        padding: 20px; /* Adjust padding */
+    }
+}
+
+@media (min-width: 992px) {
+    .login-container {
+        max-width: 400px; /* Increase max-width for larger screens */
+        padding: 25px; /* Adjust padding */
+    }
+}
+
+
+.navbar-text {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    background-color: #0b0c27e8;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+
+
+/* Custom logo styles */
+.logo {
+    max-width: 100%; /* Ensures the image never exceeds its container */
+    height: auto; /* Maintains aspect ratio */
+}
+
+
+
+@media (min-width: 1500px) {
+    .logo {
+        max-width: 200px; /* Even larger size for full-screen desktops */
+    }
+}
+
+
+.navbar{
+    background-color: #0b0c27e8;
+    color: white;
+}
+
+
+.login_btn{
+    background-color: #0b0c27e8;
+    color: white;
+    max-width: 180px; /* Set the width to 180px */
+    margin: 0 auto; /* Center the button */
+    display: block;
+    border-radius: 12px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+h5.custom-title {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold; /* Bold font style */
+}
+
+
+h5.custom-title span {
+    color: #d13613;
+    font-weight: bold; /* Change color of span */
+}
+
+.login-p
+{
+    color: #0b0c27e8;
+    font-weight: bold;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.forgot
+{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.Forgot-p
+{
+    color: #0b0c27e8;
+    font-weight: bold;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.verify-status
+{
+
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #0e693fe8;
+}
+
+.forgot-login
+{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+
+}

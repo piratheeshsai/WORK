@@ -1,0 +1,91 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* Container styling */
+.container {
+    padding: 20px;
+}
+
+/* Alert styles */
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Clickable row */
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+/* Responsive styles */
+
+/* Small devices (phones, 576px and up) */
+@media (min-width: 576px) {
+    .container {
+        padding: 15px; /* Adjust padding for small screens */
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container {
+        padding: 20px; /* Adjust padding for larger screens */
+    }
+
+    .navbar {
+        margin-bottom: 30px; /* Increase margin for medium screens */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container {
+        padding: 25px; /* Adjust padding for large screens */
+    }
+
+    .navbar {
+        margin-bottom: 40px; /* Increase margin for large screens */
+    }
+}
+
+/* Extra large devices (larger desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px; /* Set max-width for extra-large screens */
+    }
+
+    .navbar {
+        margin-bottom: 50px; /* Increase margin for extra-large screens */
+    }
+}
+
+
