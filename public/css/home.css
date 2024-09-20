@@ -558,10 +558,24 @@ ul.navbar-links li.active a .nav-text{
     left: -20px;
     justify-content: center
    }
-   .top-bar .search-bar{
-    left: 0px;
-    width: 330px;
-   }
+   .top-bar .search-bar {
+    width: 370px;
+    left: 0;
+  }
+  
+  .top-bar .search-bar .input-box {
+    font-size: 13px;
+    padding: 0px 45px 0px 15px;
+  }
+  
+  .top-bar .search-bar .Search-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .top-bar .search-bar .Search-btn i {
+    font-size: 14px;
+  }
    .page-wrapper .contents{
     padding-left: 70px;
    }
@@ -571,22 +585,22 @@ ul.navbar-links li.active a .nav-text{
         grid-template-columns: 1fr;
     }
     .top-bar .search-bar {
-        width: 300px;
+        width: 350px;
         left: 0;
       }
       
       .top-bar .search-bar .input-box {
-        font-size: 12px;
-        padding: 0px 40px 0px 15px;
+        font-size: 13px;
+        padding: 0px 45px 0px 15px;
       }
       
       .top-bar .search-bar .Search-btn {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
       }
     
       .top-bar .search-bar .Search-btn i {
-        font-size: 13px;
+        font-size: 14px;
       }
 }
 @media (max-width:668px){
@@ -670,8 +684,8 @@ ul.navbar-links li.active a .nav-text{
       }
       
       .top-bar .search-bar .input-box {
-        padding: 5px 35px 5px 10px;
-        font-size: 12px;
+        padding: 0px 30px 0px 10px;
+        font-size: 10px;
       }
       
       .top-bar .search-bar .Search-btn {
@@ -680,7 +694,7 @@ ul.navbar-links li.active a .nav-text{
       }
     
       .top-bar .search-bar .Search-btn i {
-        font-size: 12px;
+        font-size: 10px;
       }
 
 }
