@@ -570,16 +570,49 @@ ul.navbar-links li.active a .nav-text{
     .contents .description{
         grid-template-columns: 1fr;
     }
+    .top-bar .search-bar {
+        width: 300px;
+        left: 0;
+      }
+      
+      .top-bar .search-bar .input-box {
+        font-size: 12px;
+        padding: 0px 40px 0px 15px;
+      }
+      
+      .top-bar .search-bar .Search-btn {
+        width: 30px;
+        height: 30px;
+      }
+    
+      .top-bar .search-bar .Search-btn i {
+        font-size: 13px;
+      }
 }
 @media (max-width:668px){
     .description .col-1 .boxes-row{
         grid-template-columns: 1fr;
     }
+    .top-bar .search-bar {
+        width: 300px;
+        left: 0;
+      }
+      
+      .top-bar .search-bar .input-box {
+        font-size: 12px;
+        padding: 0px 40px 0px 10px;
+      }
+      
+      .top-bar .search-bar .Search-btn {
+        width: 32px;
+        height: 32px;
+      }
+    
+      .top-bar .search-bar .Search-btn i {
+        font-size: 13px;
+      }
 }
 @media (max-width:568px) {
-    .top-bar .search-bar{
-        display: none ;
-    }
     .page-wrapper .sidebar{
         width: 0px;
     }
@@ -596,6 +629,24 @@ ul.navbar-links li.active a .nav-text{
         font-size: 12px;
         font-weight: 300;
     }
+    .top-bar .search-bar {
+        width: 100%;
+        margin: 0 10px;
+      }
+      
+      .top-bar .search-bar .input-box {
+        padding: 0px 35px 0px 10px;
+        font-size: 12px;
+      }
+      
+      .top-bar .search-bar .Search-btn {
+        width: 28px;
+        height: 28px;
+      }
+    
+      .top-bar .search-bar .Search-btn i {
+        font-size: 12px;
+      }
 }
 @media (max-width:468px){
     .col-1 .chart-header{
@@ -612,6 +663,25 @@ ul.navbar-links li.active a .nav-text{
         margin-right: 12px;
         font-size: 14px;
     }
+    .top-bar .search-bar {
+        width: 100%;
+        left: 0;
+        margin: 0 10px;
+      }
+      
+      .top-bar .search-bar .input-box {
+        padding: 5px 35px 5px 10px;
+        font-size: 12px;
+      }
+      
+      .top-bar .search-bar .Search-btn {
+        width: 20px;
+        height: 20px;
+      }
+    
+      .top-bar .search-bar .Search-btn i {
+        font-size: 12px;
+      }
 
 }
 
