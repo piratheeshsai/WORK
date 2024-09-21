@@ -24,7 +24,7 @@
         <li>
             <a href="{{ route('user.work.create') }}">
                 <span class="nav-icon">
-                    <i class="fa-solid fa-user-circle"></i>
+                    <i class="fa-solid fa fa-building"></i>
                 </span>
                 <span> Create Work Orders</span>
             </a>
