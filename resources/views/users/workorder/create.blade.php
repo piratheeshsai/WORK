@@ -14,6 +14,14 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('profile.edit') }}">
+                <span class="nav-icon">
+                    <i class="fa-solid fa-user-circle"></i>
+                </span>
+                <span> Profile</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('user.work.create') }}">
                 <span class="nav-icon">
                     <i class="fa-solid fa-users"></i>

@@ -124,7 +124,7 @@
                  <li>
                      <a href="#">
                          <span class="nav-icon">
-                             <i class="fa-solid fa-tasks"></i>
+                            <i class="fa-regular fa-rectangle-list"></i>
                          </span>
                          <span class="nav-text"> View Work Orders</span>
                      </a>
