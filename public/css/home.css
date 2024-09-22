@@ -159,7 +159,7 @@ body{
     position: fixed;
     top: 70px;
     left: 0;
-    width: 280px;
+    width: 240px;
     height: calc(100vh - 70px);
     background: var(--bg-primary);
     overflow-x: hidden;
