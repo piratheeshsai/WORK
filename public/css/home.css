@@ -861,3 +861,32 @@ button.btn-primary:hover {
     }
 }
 
+
+/* create work order form */
+.form-container-create {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+.form-header-create {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+.form-control-create, .form-select-create {
+    border-radius: 8px;
+    padding: 8px;
+}
+.form-label-create {
+    font-weight: 300;
+    color: #495057;
+}
+
+
+

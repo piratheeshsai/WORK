@@ -45,7 +45,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="website">Employee Number</label>
-                                        <input type="url" class="form-control" id="Employee-Number"
+                                        <input type="text" class="form-control" id="Employee-Number"
                                             placeholder="Employee Number">
                                     </div>
                                 </div>
