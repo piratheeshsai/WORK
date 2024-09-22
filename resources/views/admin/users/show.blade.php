@@ -9,14 +9,14 @@
                 <h3>{{ $user->name }}</h3>
             </div>
             <div class="card-body">
-                <p><strong>Email:</strong> {{ $user->email }}</p>
+                {{-- <p><strong>Email:</strong> {{ $user->email }}</p> --}}
                 <p><strong>User ID:</strong> {{ $user->userID }}</p>
                 <p><strong>Role:</strong> {{ $user->role }}</p>
                 <p><strong>Created At:</strong> {{ $user->created_at }}</p>
                 <p><strong>Updated At:</strong> {{ $user->updated_at }}</p>
 
-                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                <a href="{{ route('admin.users.edit', $user->userID) }}" class="btn btn-warning">Edit</a>
+                <form action="{{ route('admin.users.destroy', $user->userID) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>

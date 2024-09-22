@@ -2,69 +2,6 @@
 @extends('tamplate.master')
 @section('content')
 
-<div class="sidebar">
-    <span class="menu-label">Menu</span>
-    <ul class="navbar-links">
-        <li class="active">
-            <a href="#">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-house"></i>
-                </span>
-                <span class="nav-text">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('profile.edit') }}">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-user-circle"></i>
-                </span>
-                <span> Profile</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('user.work.create') }}">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-users"></i>
-                </span>
-                <span> Create Work Orders</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-tasks"></i>
-                </span>
-                <span class="nav-text"> View Work Orders</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-forward"></i>
-                </span>
-                <span class="nav-text"> Forward Work Orders</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-print"></i>
-                </span>
-                <span class="nav-text"> Print Work Order</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="nav-icon">
-                    <i class="fa-solid fa-file-text"></i>
-                </span>
-                <span class="nav-text"> Reports</span>
-            </a>
-        </li>
-    </ul>
-    <span class="line"></span>
-</div>
-
 
 <div class="contents">
 
@@ -91,17 +28,15 @@
                 <label for="section" class="form-label">Section</label>
                 <select class="form-select" id="section" required>
                     <option value="" disabled selected>Select Section</option>
-                    @foreach($section as $sec)
-                        <option value="{{ $sec->id }}">{{ $sec->name }}</option>
-                    @endforeach
+
                 </select>
             </div>
 
             <!-- Subcategories (Faculties, Admin Sections, Centers) -->
             <div class="mb-3" id="subsectionsContainer" style="display: none;">
                 <label for="subsections" class="form-label">Subsection</label>
-                <select class="form-select" id="subsections" required>
-                    <option value="" disabled selected>Select Subsection</option>
+                <select class="form-select" id="subsection" required>
+                    Select Subsection
                 </select>
             </div>
 
@@ -109,7 +44,7 @@
             <div class="mb-3" id="departmentsContainer" style="display: none;">
                 <label for="departments" class="form-label">Department</label>
                 <select class="form-select" id="departments" required>
-                    <option value="" disabled selected>Select Department</option>
+                    <optio value="" disabled selected>Select Department</option>
                 </select>
             </div>
 

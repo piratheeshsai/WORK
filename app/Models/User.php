@@ -19,13 +19,26 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'userID',
         'name',
         'email',
         'password',
-        'userID',
         'role'
 
     ];
+    protected $primaryKey = 'userID';
+
+ // This ensures Laravel uses userID as the primary key.
+
+    // If the userID is not an integer, add the following:
+    protected $keyType = 'string';
+
+    // Disable auto-increment if userID is not auto-incremented
+    public $incrementing = false;
+    public function details()
+    {
+        return $this->hasOne(userDetails::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

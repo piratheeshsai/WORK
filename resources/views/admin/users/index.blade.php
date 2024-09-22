@@ -14,16 +14,16 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
+                    {{-- <th>Email</th> --}}
                     <th>Role</th>
                     <th>User ID</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr class="clickable-row" data-href="{{ route('admin.users.show', $user->id) }}">
+                    <tr class="clickable-row" data-href="{{ route('admin.users.show', $user->userID) }}">
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        {{-- <td>{{ $user->email }}</td> --}}
                         <td>{{ $user->role }}</td>
                         <td>{{ $user->userID }}</td>
                     </tr>

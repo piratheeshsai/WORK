@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\User\UserProfileController;
+
 use App\Http\Controllers\User\WorkOrderController;
 use App\Models\subsections; // Import the Subsection model
 use App\Models\departments; // Import the Department model
@@ -19,5 +21,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('/get-departments/{subsectionsId}', function($subsectionId) {
         return response()->json(departments::where('subsections_id', $subsectionId)->get());
     });
+
+    Route::get('profile', [UserProfileController::class, 'index'])->name('profile.index');
+
+
+
 
 });

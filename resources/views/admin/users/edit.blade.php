@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+        <form action="{{ route('admin.users.update', $user->userID) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -27,10 +27,10 @@
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="role">Role</label>

@@ -185,13 +185,76 @@
                 <div class="notification">
                     <i class="fa-solid fa-bell"></i>
                 </div>
-                
+
                 <div class="profile">
-                    <a href="{{ route('profile.edit') }}">
+                    <a href="{{ route('user.profile.index') }}">
                         <span>{{ Auth::user()->name }}</span>
                     </a>
                 </div>
+                <div class="sidebar">
+                    <span class="menu-label">Menu</span>
+                    <ul class="navbar-links">
+                        <li class="active">
+                            <a href="{{ route('user.dashboard') }}">
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa-house"></i>
+                                </span>
+                                <span class="nav-text">Home</span>
+                            </a>
+                        </li>
+                        <li>
 
+                                <a href="{{ route('user.profile.index') }}">
+
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                </span>
+                                <span> Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user.work.create') }}">
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa fa-building"></i>
+                                </span>
+                                <span> Create Work Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="nav-icon">
+                                    <i class="fa-regular fa-rectangle-list"></i>
+                                </span>
+                                <span class="nav-text"> View Work Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa-forward"></i>
+                                </span>
+                                <span class="nav-text"> Forward Work Orders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa-print"></i>
+                                </span>
+                                <span class="nav-text"> Print Work Order</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="nav-icon">
+                                    <i class="fa-solid fa-file-text"></i>
+                                </span>
+                                <span class="nav-text"> Reports</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <span class="line"></span>
+                </div>
 
             <!-- Logout Form -->
             <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">

@@ -29,6 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+
         switch ($request->user()->role) {
             case 'Admin':
                 return redirect()->intended(RouteServiceProvider::ADMIN);
@@ -40,7 +41,7 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->intended(RouteServiceProvider::CIVIL);
             case 'Engineer':
                 return redirect()->intended(RouteServiceProvider::ENGINEER);
-                case 'Recommender':
+            case 'Recommender':
                     return redirect()->intended(RouteServiceProvider::RECOMMENDER);
             default:
                 return redirect()->intended(RouteServiceProvider::HOME); // or any default page

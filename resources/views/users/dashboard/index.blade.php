@@ -14,7 +14,9 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('profile.edit') }}">
+
+                <a href="{{ route('user.profile.index') }}">
+
                 <span class="nav-icon">
                     <i class="fa-solid fa-user-circle"></i>
                 </span>

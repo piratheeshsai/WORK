@@ -159,7 +159,7 @@ body{
     position: fixed;
     top: 70px;
     left: 0;
-    width: 280px;
+    width: 240px;
     height: calc(100vh - 70px);
     background: var(--bg-primary);
     overflow-x: hidden;
@@ -562,12 +562,12 @@ ul.navbar-links li.active a .nav-text{
     width: 370px;
     left: 0;
   }
-  
+
   .top-bar .search-bar .input-box {
     font-size: 13px;
     padding: 0px 45px 0px 15px;
   }
-  
+
   .top-bar .search-bar .Search-btn {
     width: 35px;
     height: 35px;
@@ -588,17 +588,17 @@ ul.navbar-links li.active a .nav-text{
         width: 350px;
         left: 0;
       }
-      
+
       .top-bar .search-bar .input-box {
         font-size: 13px;
         padding: 0px 45px 0px 15px;
       }
-      
+
       .top-bar .search-bar .Search-btn {
         width: 35px;
         height: 35px;
       }
-    
+
       .top-bar .search-bar .Search-btn i {
         font-size: 14px;
       }
@@ -611,17 +611,17 @@ ul.navbar-links li.active a .nav-text{
         width: 300px;
         left: 0;
       }
-      
+
       .top-bar .search-bar .input-box {
         font-size: 12px;
         padding: 0px 40px 0px 10px;
       }
-      
+
       .top-bar .search-bar .Search-btn {
         width: 32px;
         height: 32px;
       }
-    
+
       .top-bar .search-bar .Search-btn i {
         font-size: 13px;
       }
@@ -647,17 +647,17 @@ ul.navbar-links li.active a .nav-text{
         width: 100%;
         margin: 0 10px;
       }
-      
+
       .top-bar .search-bar .input-box {
         padding: 0px 35px 0px 10px;
         font-size: 12px;
       }
-      
+
       .top-bar .search-bar .Search-btn {
         width: 28px;
         height: 28px;
       }
-    
+
       .top-bar .search-bar .Search-btn i {
         font-size: 12px;
       }
@@ -682,17 +682,17 @@ ul.navbar-links li.active a .nav-text{
         left: 0;
         margin: 0 10px;
       }
-      
+
       .top-bar .search-bar .input-box {
         padding: 0px 30px 0px 10px;
         font-size: 10px;
       }
-      
+
       .top-bar .search-bar .Search-btn {
         width: 20px;
         height: 20px;
       }
-    
+
       .top-bar .search-bar .Search-btn i {
         font-size: 10px;
       }

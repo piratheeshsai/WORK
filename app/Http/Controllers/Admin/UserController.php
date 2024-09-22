@@ -25,7 +25,6 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
             'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical'])],
             'password' => 'required|string|min:8|confirmed',
             'userID' => 'required|string|unique:users,userID|max:50', // Include userID validation
@@ -33,7 +32,7 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            // 'email' => $request->email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
             'userID' => $request->userID, // Store userID
@@ -51,15 +50,15 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            // 'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical'])],
             'password' => 'nullable|string|min:8|confirmed',
-            'userID' => ['required', 'string', 'max:50', Rule::unique('users', 'userID')->ignore($user->id)], // Include userID validation
+            'userID' => ['required', 'string', 'max:50', Rule::unique('users', 'userID')->ignore($user->userID)], // Include userID validation
         ]);
 
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
+            // 'email' => $request->email,
             'role' => $request->role,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
             'userID' => $request->userID, // Update userID

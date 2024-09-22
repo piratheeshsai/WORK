@@ -22,10 +22,10 @@
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label for="userID">User ID</label>
