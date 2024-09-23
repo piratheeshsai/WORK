@@ -30,23 +30,26 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label for="eMail">Email</label>
-                                        <input type="email" class="form-control" id="eMail"
-                                            placeholder="Enter email ID">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email"
+                                        value="{{ old('email', optional($userDetails)->email) }}"
+                                        placeholder="{{ optional($userDetails)->email ? '' : 'Enter your email' }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
                                         <input type="text" class="form-control" id="phone"
-                                            placeholder="Enter phone number">
+                                        value="{{ old('phone', optional($userDetails)->PhoneNumber ? '+94' . optional($userDetails)->PhoneNumber : '+1 ') }}"
+                                        placeholder="{{ optional($userDetails)->PhoneNumber ? '' : 'Enter your PhoneNumber' }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="website">Employee Number</label>
                                         <input type="text" class="form-control" id="Employee-Number"
-                                            placeholder="Employee Number">
+                                        value="{{ old('Employee-Number', optional($userDetails)->EmployeeId) }}"
+                                        placeholder="{{ optional($userDetails)->EmployeeId ? '' : 'Enter your Employee Number' }}">
                                     </div>
                                 </div>
 
@@ -86,7 +89,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="zIp">Administrator</label>
-                                        <input type="text" class="form-control" id="Administrator" placeholder="Administrator">
+                                        <input type="text" class="form-control" id="section_head" placeholder="Administrator" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +102,6 @@
                                             class="btn btn-primary">Update</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -32,9 +32,9 @@ function sidebarToggle() {
 //         otherDepartments.style.display = 'block';
 //     }
 // });
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('section').addEventListener('change', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Event listener for section change
+    document.getElementById('section').addEventListener('change', function () {
         const sectionId = this.value;
 
         fetch(`/user/get-subsections/${sectionId}`)
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('Subsections data:', data); // Log the data received
+                console.log('Subsections data:', data);
 
                 const subsectionsSelect = document.getElementById('subsections');
                 subsectionsSelect.innerHTML = '<option value="" disabled selected>Select Subsection</option>';
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const option = document.createElement('option');
                     option.value = subsection.id;
                     option.textContent = subsection.name;
+                    option.setAttribute('data-head', subsection.section_head); // Assuming section_head is part of the data
                     subsectionsSelect.appendChild(option);
                 });
 
@@ -62,7 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching subsections:', error));
     });
 
-    document.getElementById('subsections').addEventListener('change', function() {
+    // Event listener for subsection change
+    document.getElementById('subsections').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const sectionHead = selectedOption.getAttribute('data-head');
+        document.getElementById('section_head').value = sectionHead || ''; // Set the section head input value
+
         const subsectionsId = this.value;
 
         fetch(`/user/get-departments/${subsectionsId}`)
@@ -73,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('Departments data:', data); // Add this line to log the response
+                console.log('Departments data:', data);
 
                 const departmentsSelect = document.getElementById('departments');
                 departmentsSelect.innerHTML = '<option value="" disabled selected>Select Department</option>';
@@ -90,6 +96,3 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching departments:', error));
     });
 });
-
-
-

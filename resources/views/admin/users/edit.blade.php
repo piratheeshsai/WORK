@@ -1,4 +1,4 @@
-@extends('admin.users.master')
+@extends('admin.layouts.master')
 @section('contents')
     <div class="container">
         <h1>Edit User</h1>
