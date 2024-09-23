@@ -5,7 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Section;
+use App\Models\subsections;
+use App\Models\departments;
 use App\Models\userDetails;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 class UserProfileController extends Controller
 {
@@ -23,4 +26,56 @@ class UserProfileController extends Controller
         // Pass both the user and sections to the view
         return view('users.profile.index', compact('user', 'section', 'userDetails'));
     }
+
+    public function update(Request $request)
+{
+    // Fetch the authenticated user
+    $user = auth()->user();
+
+    // Debugging: Check user instance
+    if (!$user) {
+        return redirect()->back()->withErrors(['user' => 'User not authenticated.']);
+    }
+
+    $user = auth()->user();
+
+
+    // Validate the request data
+    $request->validate([
+    'name' => 'required|string|max:255',
+    'email' => 'nullable|email|max:255',
+    'PhoneNumber' => 'nullable|string|max:15',
+    'EmployeeId' => 'nullable|string|max:20',
+    'section' => 'required|exists:section,id', // Change 'sections' to 'section'
+    'subsection' => 'nullable|exists:subsections,id',
+    'department' => 'nullable|exists:departments,id',
+]);
+    // Update the 'users' table
+    $user->update(['name' => $request->name]);
+
+    $sectionName = Section::find($request->section)->name;
+    $subsectionName = null;
+    $departmentName = null;
+
+    if ($request->subsection) {
+        $subsectionName = subsections::find($request->subsection)->name;
+    }
+
+    if ($request->department) {
+        $departmentName = departments::find($request->department)->name;
+    }
+    // Update user details
+    $userDetails = userDetails::firstOrNew(['userID' => $user->userID]);
+    $userDetails->email = $request->email;
+    $userDetails->PhoneNumber = $request->PhoneNumber;
+    $userDetails->EmployeeId = $request->EmployeeId;
+    
+    $userDetails->section = $sectionName;
+    $userDetails->subsection = $subsectionName;
+    $userDetails->department = $departmentName;
+    $userDetails->save();
+    // Redirect back with success message
+    return redirect()->back()->with('success', 'Profile updated successfully!');
+}
+
 }

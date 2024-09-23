@@ -11,5 +11,6 @@ class UserDashboardController extends Controller
     public function index():View{
         return view('users.dashboard.index');
     }
+    
 }
 

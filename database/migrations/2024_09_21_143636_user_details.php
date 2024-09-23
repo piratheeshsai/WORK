@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('EmployeeId')->primary();
             $table->string('userID');  // Foreign key to users table
             $table->string('full_name');
-            $table->string('section');
-            $table->string('subsection');
-            $table->string('department'); 
+            $table->string('section')->nullable();
+            $table->string('subsection')->nullable();
+            $table->string('department')->nullable();
             $table->string('PhoneNumber');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable(); // Store email in this table
@@ -25,7 +25,6 @@ return new class extends Migration
             // Foreign key relationship
             $table->foreign('userID')->references('userID')->on('users')->onDelete('cascade');
         });
-
     }
 
     /**
@@ -33,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('user_details', function (Blueprint $table) {
+            $table->dropColumn('department');
+        });
     }
 };

@@ -24,8 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'role'
-
     ];
+
+
+
     protected $primaryKey = 'userID';
 
  // This ensures Laravel uses userID as the primary key.
@@ -39,6 +41,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(userDetails::class);
     }
+    public function userDetails()
+{
+    return $this->hasOne(UserDetails::class, 'userID', 'userID');
+}
 
     /**
      * The attributes that should be hidden for serialization.

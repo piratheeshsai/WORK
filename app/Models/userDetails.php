@@ -9,14 +9,31 @@ class userDetails extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['full_name', 'EmployeeId', 'section', 'department', 'subsection','PhoneNumber', 'email', 'userID'];
+    protected $fillable = [
+        'full_name',
+        'EmployeeId',
+        'section',
+        'department',
+        'subsection',
+        'PhoneNumber',
+        'email',
+        'userID'
+    ];
 
-
+    protected $keyType = 'string';
     public $incrementing = false;
     protected $primaryKey = 'userID';
+
+    protected $table = 'user_details';
+
     public function user()
     {
-        return $this->belongsTo(User::class,'userID');
+        return $this->belongsTo(User::class, 'userID');
+    }
+
+    public function workOrders()
+    {
+        return $this->hasMany(workOrders::class, 'EmployeeId', 'EmployeeId');
     }
 
     /**
@@ -27,6 +44,4 @@ class userDetails extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
 }

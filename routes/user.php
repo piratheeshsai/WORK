@@ -24,7 +24,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile.index');
 
+    Route::put('profile', [UserProfileController::class, 'update'])->name('profile.update');
 
-
+    Route::post('workorder/store', [WorkOrderController::class, 'store'])->name('work.store');
 
 });
