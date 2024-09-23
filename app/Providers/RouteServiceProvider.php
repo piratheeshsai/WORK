@@ -16,6 +16,7 @@ class RouteServiceProvider extends ServiceProvider
     public const ENGINEER = 'engineer/dashboard';
     public const ELECTRICAL = 'electrical/dashboard';
     public const RECOMMENDER = 'recommender/dashboard';
+    public const HOME = '/home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
