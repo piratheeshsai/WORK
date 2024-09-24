@@ -48,19 +48,46 @@ class WorkOrderController extends Controller
             return redirect()->back()->withErrors(['message' => 'User details not found.']);
         }
 
-        $employeeId = $userDetails->EmployeeId;
+       // Get the employee ID
+$employeeId = $userDetails->EmployeeId;
 
-        // Generate a unique ID for the work order
-        $id = $employeeId . '-' . uniqid();
+// Get the current year
+$year = date('Y');
 
-        // Create the work order
-        workOrder::create([
-            'id' => $id,
-            'work_type' => $request->work_type,
-            'priority' => $request->priority,
-            'complain' => $request->complain,
-            'EmployeeId' => $employeeId,
-        ]);
+// Get the work type
+$workType = strtoupper($request->work_type); // Uppercasing the work type for consistency
+
+// Fetch the latest work order for the current year and work type
+$latestWorkOrder = workOrder::whereYear('created_at', $year)
+                            ->where('work_type', $workType)
+                            ->orderBy('id', 'desc')
+                            ->first();
+
+// Determine the increment number
+if ($latestWorkOrder) {
+    // Extract the incremental number from the latest work order ID
+    $latestIdParts = explode('/', $latestWorkOrder->id);
+    $incrementNumber = (int) end($latestIdParts) + 1;
+} else {
+    // Start increment number if no work order exists for the current year and work type
+    $incrementNumber = 1;
+}
+
+// Format the increment number with leading zeros (e.g., 001, 002)
+$incrementFormatted = str_pad($incrementNumber, 3, '0', STR_PAD_LEFT);
+
+// Generate the new work order ID
+$id = "WMD/{$workType}/{$year}/{$incrementFormatted}";
+
+// Create the work order
+workOrder::create([
+    'id' => $id,
+    'work_type' => $request->work_type,
+    'priority' => $request->priority,
+    'complain' => $request->complain,
+    'EmployeeId' => $employeeId,
+]);
+
 
         return redirect()->back()->with('success', 'Work order created successfully!');
     }
