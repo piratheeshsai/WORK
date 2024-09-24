@@ -49,7 +49,6 @@ class WorkOrderController extends Controller
         }
 
        // Get the employee ID
-// Get the employee ID
 $employeeId = $userDetails->EmployeeId;
 
 // Get the current year
@@ -66,11 +65,8 @@ if (in_array($workTypeInput, ['plumbing & water supply', 'carpentry & masonry'])
     $workType = strtoupper($workTypeInput); // Convert other types to uppercase
 }
 
-// Fetch the latest work order for the current year and work type
-$latestWorkOrder = workOrder::whereYear('created_at', $year)
-                            ->where('work_type', $workType)
-                            ->orderBy('id', 'desc')
-                            ->first();
+// Fetch the latest work order across all work types
+$latestWorkOrder = workOrder::orderBy('id', 'desc')->first();
 
 // Determine the increment number
 if ($latestWorkOrder) {
@@ -78,7 +74,7 @@ if ($latestWorkOrder) {
     $latestIdParts = explode('/', $latestWorkOrder->id);
     $incrementNumber = (int) end($latestIdParts) + 1;
 } else {
-    // Start increment number if no work order exists for the current year and work type
+    // Start increment number if no work order exists
     $incrementNumber = 1;
 }
 
@@ -96,7 +92,6 @@ workOrder::create([
     'complain' => $request->complain,
     'EmployeeId' => $employeeId,
 ]);
-
 
 
         return redirect()->back()->with('success', 'Work order created successfully!');
