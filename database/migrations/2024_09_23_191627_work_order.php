@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
             // Foreign key relationship
             $table->foreign('EmployeeId')->references('EmployeeId')->on('user_details')->onDelete('cascade');
-
         });
     }
 

@@ -1,13 +1,13 @@
 @extends('tamplate.master')
 @section('content')
-    <div class="container mt-5">
+<div class="container">
+    <div class="form-container-create">
         <div class="container mt-5">
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
-        <div class="form-container-create shadow p-4 rounded" style="background-color: #f8f9fa; border: 2px solid #ced4da;">
             <h2 class="form-header-create text-center mb-4" style="font-weight: bold; color: #343a40;">Create Here</h2>
             <form action="{{ route('user.work.store') }}" method="POST">
                 @csrf

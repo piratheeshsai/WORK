@@ -122,11 +122,13 @@
             @yield('content')
         </div>
 
+
+        {{-- <footer class="footer text-center py-3">
+        <p>&copy; 2024 SEUSL. All rights reserved.</p>
+    </footer> --}}
     </div>
 
-    <footer class="footer text-center py-3">
-        <p>&copy; 2024 SEUSL. All rights reserved.</p>
-    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/home.js') }}"></script>
