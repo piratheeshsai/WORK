@@ -49,13 +49,22 @@ class WorkOrderController extends Controller
         }
 
        // Get the employee ID
+// Get the employee ID
 $employeeId = $userDetails->EmployeeId;
 
 // Get the current year
 $year = date('Y');
 
-// Get the work type
-$workType = strtoupper($request->work_type); // Uppercasing the work type for consistency
+// Get the work type from the request and map specific work types to "Civil"
+$workTypeInput = strtolower($request->work_type); // Convert to lowercase for comparison
+
+// Map work types
+$workType = '';
+if (in_array($workTypeInput, ['plumbing & water supply', 'carpentry & masonry'])) {
+    $workType = 'Civil';
+} else {
+    $workType = strtoupper($workTypeInput); // Convert other types to uppercase
+}
 
 // Fetch the latest work order for the current year and work type
 $latestWorkOrder = workOrder::whereYear('created_at', $year)
@@ -82,11 +91,12 @@ $id = "WMD/{$workType}/{$year}/{$incrementFormatted}";
 // Create the work order
 workOrder::create([
     'id' => $id,
-    'work_type' => $request->work_type,
+    'work_type' => $workType,
     'priority' => $request->priority,
     'complain' => $request->complain,
     'EmployeeId' => $employeeId,
 ]);
+
 
 
         return redirect()->back()->with('success', 'Work order created successfully!');
