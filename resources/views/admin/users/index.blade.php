@@ -30,7 +30,7 @@
             </tbody>
         </table>
          <!-- Display pagination links -->
-         <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
             {{ $users->links() }}
         </div>
     </div>
@@ -92,18 +92,20 @@
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">{{ optional($user->userDetails)->EmployeeId ?? 'No ID' }}</span>
                     </td>
-                    <td class="align-middle">
-                        <a href="{{ route('admin.users.show', $user->userID) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" title="Edit user">
-                            Edit
+                    <td class="align-middle text-center text-sm">
+                        <a href="{{ route('admin.users.show', $user->userID) }}" class=" font-weight-bold" data-toggle="tooltip" title="Edit user">
+                            <span class="badge badge-sm bg-gradient-success">View</span>
                           </a>
                     </td>
                   </tr>
                   @endforeach
 
-                </tbody>
+            </tbody>
 
             </table>
-
+            <div class="d-flex  justify-content-center">
+                {{ $users->links() }}
+            </div>
             </div>
           </div>
         </div>

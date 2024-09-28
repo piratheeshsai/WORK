@@ -124,6 +124,17 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-white p-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa-solid fa-right-from-bracket cursor-pointer"></i>
+                </a>
+            </li>
+
+            <!-- Hidden Logout Form -->
+            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                @csrf
+            </form>
+
         </ul>
     </div>
 </div>
