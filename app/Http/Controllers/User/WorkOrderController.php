@@ -33,7 +33,7 @@ class WorkOrderController extends Controller
     public function store(Request $request)
     {
 
-    
+
         // Validate the request data
         $request->validate([
             'work_type' => 'required|string|max:255',
@@ -53,6 +53,7 @@ $employeeId = $userDetails->EmployeeId;
 
 // Get the current year
 $year = date('Y');
+
 
 // Get the work type
 $workType = strtoupper($request->work_type); // Uppercasing the work type for consistency
@@ -89,7 +90,7 @@ workOrder::create([
 ]);
 
 
-        return redirect()->back()->with('success', 'Work order created successfully!');
+return redirect()->back()->with('success', 'Work order created successfully!');
     }
 
 }
