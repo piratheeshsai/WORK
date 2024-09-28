@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
-@section('contents')
+@section('content')
     <div class="container">
+        <div class="card">
         <h1>Edit User</h1>
 
         @if ($errors->any())
@@ -55,6 +56,7 @@
 
             <button type="submit" class="btn btn-primary">Update User</button>
         </form>
-        
+        </div>
+
     </div>
 @endsection

@@ -21,6 +21,8 @@ class SubsectionSeed extends Seeder
         // Administration
         ['name' => 'Finance Department','section_head' =>'abc', 'section_id' => 2],
         ['name' => 'Human Resources', 'section_head' =>'fgh','section_id' => 2],
+        ['name' => 'Maintenance', 'section_head' =>'fgh','section_id' => 2],
+
         // Centers
         ['name' => 'Research Center','section_head' =>'gg', 'section_id' => 3],
         ['name' => 'Library Services', 'section_head' =>'ghh','section_id' => 3],

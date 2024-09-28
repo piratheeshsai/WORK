@@ -12,7 +12,7 @@ class UseDetailsSeeder extends Seeder
      */
     public function run(): void
     {
-        userDetails::create([
+         userDetails::create([
             'full_name' => 'User',
             'userID' => 'User',
             'EmployeeId' => 'User1',
@@ -21,6 +21,17 @@ class UseDetailsSeeder extends Seeder
             'department' => 'Mechanical Lab',
             'PhoneNumber' => '0757480809',
             'email' => 'User@gmail.com',
-        ]);
+        ],
+        [
+            'full_name' => 'Admin',
+            'userID' => 'Admin',
+            'EmployeeId' => 'CO 0000',
+            'section' => 'Administration',
+            'subsection' => 'Maintenance',
+            'department' => '',
+            'PhoneNumber' => '075000000',
+            'email' => 'admin@gmail.com',
+        ]
+    );
     }
 }
