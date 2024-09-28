@@ -2,121 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/users.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" img src="{{ asset('img/logo-ct-dark.png') }}">
+    <title>
+        Admin Dashboard
+    </title>
+
+    <!--     Fonts and icons -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+
+    <!-- Nucleo Icons -->
+
+    <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-</head <body>
-<div class="page-wrapper">
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <div class="hamburger-btn">
-                <span></span>
-                <span></span>
-                <span></span>
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+
+    <!-- CSS Files -->
+
+    <link id="pagestyle" href="{{ asset('css/argon-dashboard.css?v=2.0.4"') }}" rel="stylesheet">
+
+    </head>
+
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    {{-- <div class="min-height-300" style="background-image: url('{{ asset('img/login5.jpg') }}');  position: absolute; width: 100%;"> --}}
+
+
+    {{-- Sidevar start --}}
+
+    @include('admin.component.menu')
+
+    {{-- sidevar end --}}
+
+
+    <main class="main-content position-relative border-radius-lg ">
+
+
+        {{-- Navbar start --}}
+
+        @include('admin.component.navbar')
+
+        <!-- End Navbar -->
+
+        @yield('content')
+
+
+
+
+        {{-- <footer class="footer pt-3 bt-0 ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>,
+                made with <i class="fa fa-heart"></i> by
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                for a better web.
+              </div>
             </div>
-            <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
-        <div class="search-bar">
-            <input type="text" class="input-box" placeholder="Search...">
-            <span class="Search-btn">
-                <i class="fa-solid fa-search"></i>
-            </span>
-        </div>
-        <div class="top-bar-right">
-            <div class="mode-switch">
-                <i class="fa-solid fa-moon"></i>
-            </div>
-            <div class="notification">
-                <i class="fa-solid fa-bell"></i>
-            </div>
-            <div class="profile">
-                <span>{{ Auth::user()->name }}</span>
-            </div>
-            <!-- Logout Form -->
-            <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
-                @csrf
-            </form>
+        </footer> --}}
 
-            <!-- Logout Button -->
-            <div class="logout" onclick="document.getElementById('logout-form').submit();">
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </div>
+       
+    </main>
 
-        </div>
-    </div>
-    <div class="sidebar">
-        <span class="menu-label">Menu</span>
-        <ul class="navbar-links">
-            <li class="active">
-                <a href="{{ route('admin.dashboard') }}">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-house"></i>
-                    </span>
-                    <span class="nav-text"> Dashboard</span>
-                </a>
-            </li>
-            <li>
+    {{-- Settings start --}}
 
-                <a href="{{ route('admin.users.index') }}" target="content-frame">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-users"></i>
-                    </span>
-                    <span> Users</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-tasks"></i>
-                    </span>
-                    <span class="nav-text"> View Work Orders</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-forward"></i>
-                    </span>
-                    <span class="nav-text"> Forward Work Orders</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-print"></i>
-                    </span>
-                    <span class="nav-text"> Print Work Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="nav-icon">
-                        <i class="fa-solid fa-file-text"></i>
-                    </span>
-                    <span class="nav-text"> Reports</span>
-                </a>
-            </li>
-        </ul>
-        <span class="line"></span>
-    </div>
-
-    <div class="contents">
-        @yield('contents')
-    </div>
+    @include('admin.component.setting')
 
 
-</div>
+    {{-- End setting --}}
 
-</div>
-<script src="{{ asset('js/home.js') }}"></script>
-<script src="{{ asset('js/users.js') }}"></script>
+
+
+
+
+    <script src="{{ asset('js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('js/argon-dashboard.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
+    <script src="{{ asset('js/users.js') }}"></script>
+
+
+
 
 </body>
 
