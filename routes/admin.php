@@ -39,8 +39,9 @@ Route::group(['prefix' =>'admin', 'as' =>'admin.'], function(){
     Route::resource('sections', SectionController::class);
 
 
+    Route::post('departments/store', [SectionController::class, 'storeDepartment'])->name('departments.store');
 
 
-
+    Route::post('subsections', [SectionController::class, 'storeSubsection'])->name('subsections.store');
 
 });
