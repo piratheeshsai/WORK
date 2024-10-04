@@ -26,6 +26,6 @@ class workOrder extends Model
 
 public function userDetails()
 {
-    return $this->belongsTo(UserDetails::class, 'EmployeeId', 'EmployeeId');
+    return $this->belongsTo(UserDetail::class, 'EmployeeId', 'EmployeeId');
 }
 }

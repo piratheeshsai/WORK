@@ -5,9 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Section;
-use App\Models\subsections;
-use App\Models\departments;
-use App\Models\userDetails;
+use App\Models\Subsection;
+use App\Models\Department;
+use App\Models\UserDetail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\View\View;
 class UserProfileController extends Controller
@@ -21,7 +21,7 @@ class UserProfileController extends Controller
         // Fetch all sections to be used in the form
         $section = Section::all();
 
-        $userDetails = userDetails::where('userID', $user->userID)->first();
+        $userDetails = UserDetail::where('userID', $user->userID)->first();
 
         // Pass both the user and sections to the view
         return view('users.profile.index', compact('user', 'section', 'userDetails'));
@@ -58,18 +58,18 @@ class UserProfileController extends Controller
     $departmentName = null;
 
     if ($request->subsection) {
-        $subsectionName = subsections::find($request->subsection)->name;
+        $subsectionName = Subsection::find($request->subsection)->name;
     }
 
     if ($request->department) {
-        $departmentName = departments::find($request->department)->name;
+        $departmentName = Department::find($request->department)->name;
     }
     // Update user details
-    $userDetails = userDetails::firstOrNew(['userID' => $user->userID]);
+    $userDetails = UserDetail::firstOrNew(['userID' => $user->userID]);
     $userDetails->email = $request->email;
     $userDetails->PhoneNumber = $request->PhoneNumber;
     $userDetails->EmployeeId = $request->EmployeeId;
-    
+
     $userDetails->section = $sectionName;
     $userDetails->subsection = $subsectionName;
     $userDetails->department = $departmentName;

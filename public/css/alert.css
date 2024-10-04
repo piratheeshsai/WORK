@@ -1,0 +1,54 @@
+Custom button styles
+.my-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-1 {
+    background-color: #d33; /* Custom color for the cancel button */
+    color: white; /* Text color */
+}
+
+.order-2 {
+    background-color: #3085d6; /* Custom color for the confirm button */
+    color: white; /* Text color */
+}
+
+.order-3 {
+    background-color: #f39c12; /* Custom color for the deny button */
+    color: white; /* Text color */
+}
+
+/* Optional: Style the alert box */
+.swal2-popup {
+    padding: 20px; /* Base padding */
+    font-size: 16px; /* Base font size for readability */
+    max-height: 80vh; /* Set a max height based on viewport height */
+    overflow-y: auto; /* Allow scrolling if content exceeds max height */
+    border-radius: 8px; /* Optional: rounded corners */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .swal2-popup {
+        width: 90%; /* Use a wider width for smaller screens */
+        font-size: 16px; /* Keep font size for readability */
+        max-height: 70vh; /* Adjust max height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .swal2-popup {
+        width: 95%; /* Full width for very small screens */
+        font-size: 14px; /* Smaller font size for compactness */
+        max-height: 60vh; /* Further reduce max height for very small screens */
+    }
+}
+
+/* Additional adjustments for larger screens */
+@media (min-width: 769px) {
+    .swal2-popup {
+        width: 70%; /* Use a narrower width for larger screens */
+        max-width: 500px; /* Set a max width */
+    }
+}

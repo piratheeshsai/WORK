@@ -53,15 +53,13 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // 'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical'])],
             'password' => 'nullable|string|min:8|confirmed',
-            'userID' => ['required', 'string', 'max:50', Rule::unique('users', 'userID')->ignore($user->userID)], // Include userID validation
+            'userID' => ['required', 'string', 'max:50', Rule::unique('users', 'userID')->ignore($user->getKey(), $user->getKeyName())], // Adjusted to handle userID
         ]);
 
         $user->update([
             'name' => $request->name,
-            // 'email' => $request->email,
             'role' => $request->role,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
             'userID' => $request->userID, // Update userID

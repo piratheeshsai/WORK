@@ -181,3 +181,15 @@ if (win && document.querySelector('#sidenav-scrollbar')) {
 
 
 
+window.onload = function() {
+    setTimeout(function() {
+        var alert = document.getElementById('success-alert');
+        if (alert) {
+            alert.style.transition = 'opacity 0.5s ease';
+            alert.style.opacity = '0'; // Fade out
+            setTimeout(function() {
+                alert.remove(); // Remove from DOM
+            }, 500); // Wait for fade-out to complete
+        }
+    }, 3000); // Display for 3 seconds
+};

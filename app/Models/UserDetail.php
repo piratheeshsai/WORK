@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class userDetails extends Model
+class UserDetail extends Model
 {
     use HasFactory;
 
@@ -33,7 +33,7 @@ class userDetails extends Model
 
     public function workOrders()
     {
-        return $this->hasMany(workOrders::class, 'EmployeeId', 'EmployeeId');
+        return $this->hasMany(WorkOrder::class, 'EmployeeId', 'EmployeeId');
     }
 
     /**

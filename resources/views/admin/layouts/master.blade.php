@@ -11,6 +11,11 @@
     </title>
 
     <!--     Fonts and icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
@@ -18,6 +23,7 @@
 
     <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nucleo-svg.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/alert.css') }}" rel="stylesheet">
     <!-- Font Awesome Icons -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -109,7 +115,7 @@
     <script src="{{ asset('js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('js/argon-dashboard.min.js') }}"></script>
     <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
-    <script src="{{ asset('js/users.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
 
 
 

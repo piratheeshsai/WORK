@@ -26933,4 +26933,49 @@ pre[class*="language-"] {
   }
 }
 
+.custom-alert {
+    font-size: 14px; /* Smaller font size */
+    width: 300px;    /* Adjust width */
+    margin: 10px auto; /* Center alert on the page */
+    padding: 10px;   /* Adjust padding */
+    text-align: center;
+    position: fixed; /* Fixed position to make it visible at all times */
+    top: 20px;       /* Position towards the top */
+    left: 50%;       /* Center horizontally */
+    transform: translateX(-50%);
+    border-radius: 8px; /* Rounded corners */
+    z-index: 9999;   /* Make sure it stays on top */
+}
+
+
+/* Custom styles for SweetAlert2 */
+.custom-popup {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    font-size: 16px; /* Adjust font size */
+}
+
+.custom-title {
+    font-weight: bold; /* Bold title */
+    font-size: 20px; /* Adjust title size */
+    color: #333; /* Custom title color */
+}
+
+.custom-content {
+    font-size: 16px; /* Adjust content font size */
+    color: #666; /* Custom content color */
+}
+
+/* Optional: Customize button styles */
+.swal2-confirm {
+    background-color: #3085d6; /* Custom confirm button color */
+    color:#fff; /* Custom confirm button text color */
+}
+
+.swal2-cancel {
+    background-color: #d33; /* Custom cancel button color */
+    color: #fff; /* Custom cancel button text color */
+}
+
+
 /*# sourceMappingURL=dashboard-free.css.map */

@@ -13,6 +13,6 @@ class Section extends Model
     // Define the relationship with Subsection
     public function subsections()
     {
-        return $this->hasMany(subsections::class, 'section_id');
+        return $this->hasMany(Subsection::class, 'section_id');
     }
 }

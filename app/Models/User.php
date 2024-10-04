@@ -39,11 +39,11 @@ class User extends Authenticatable
     public $incrementing = false;
     public function details()
     {
-        return $this->hasOne(userDetails::class);
+        return $this->hasOne(UserDetail::class);
     }
     public function userDetails()
 {
-    return $this->hasOne(UserDetails::class, 'userID', 'userID');
+    return $this->hasOne(UserDetail::class, 'userID', 'userID');
 }
 
     /**
