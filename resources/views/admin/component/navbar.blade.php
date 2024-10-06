@@ -125,16 +125,50 @@
                 </ul>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-white p-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a href="javascript:;" class="nav-link text-white p-0" id="logout-btn">
                     <i class="fa-solid fa-right-from-bracket cursor-pointer"></i>
                 </a>
             </li>
-
+            
             <!-- Hidden Logout Form -->
             <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                 @csrf
             </form>
-
+            
+            <script>
+                document.getElementById('logout-btn').addEventListener('click', function(event) {
+                    // Prevent the default action
+                    event.preventDefault();
+            
+                    // Show SweetAlert confirmation for logout
+                    Swal.fire({
+                        title: 'Are you sure you want to log out?',
+                        text: "You will be logged out of this site.",
+                        icon: 'warning',
+                        showCancelButton: true, // Show the "Cancel" button
+                        confirmButtonText: 'Yes, log out!', // Text for the confirm button
+                        cancelButtonText: 'No, stay here', // Text for the cancel button
+                        customClass: {
+                            actions: 'my-actions', // Custom class for button actions
+                            confirmButton: 'order-2', // Custom class for confirm button
+                            cancelButton: 'order-1 right-gap', // Custom class for cancel button
+                        },
+                        width: '30%',
+                        maxWidth: '100px',
+                        padding: '20px',
+                        heightAuto: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If the user confirms, submit the logout form
+                            document.getElementById('logout-form').submit();
+                            Swal.fire('Logged out!', 'You have been successfully logged out.', 'success');
+                        } else if (result.isDismissed) {
+                            // If the user cancels, no action is taken
+                            Swal.fire('Logout canceled', '', 'info');
+                        }
+                    });
+                });
+            </script>            
         </ul>
     </div>
 </div>
