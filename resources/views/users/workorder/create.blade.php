@@ -1,4 +1,5 @@
-@extends('tamplate.master')
+@extends('users.component.master')
+
 @section('content')
 <div class="container">
     <div class="form-container-create">

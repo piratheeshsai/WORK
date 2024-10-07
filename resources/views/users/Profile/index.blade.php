@@ -1,4 +1,4 @@
-@extends('tamplate.master')
+@extends('users.component.master')
 
 @section('content')
     <div class="contents">

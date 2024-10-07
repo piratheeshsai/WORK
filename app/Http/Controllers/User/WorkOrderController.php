@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use App\Models\workOrder;
-use App\Models\userDetails; // Import the Section model
+use App\Models\UserDetail; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -22,7 +22,7 @@ class WorkOrderController extends Controller
         $section = Section::all();
 
         // Fetch user details
-        $userDetails = userDetails::where('userID', $user->userID)->first();
+        $userDetails = UserDetail::where('userID', $user->userID)->first();
         // Fetch all sections to be used in the form
         $section = Section::all();
 
