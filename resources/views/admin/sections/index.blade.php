@@ -317,7 +317,7 @@ $(document).ready(function () {
         var departmentName = $('#department_name').val();
 
         $.ajax({
-            url: "{{ route('admin.departments.update') }}", // Update with correct route
+            url: "{{ route('admin.departments.update') }}", // Corrected the route
             type: 'PUT',
             data: {
                 department_id: departmentId,
@@ -335,5 +335,4 @@ $(document).ready(function () {
         });
     });
 });
-
 </script>

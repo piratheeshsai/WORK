@@ -50,20 +50,33 @@ class SectionController extends Controller
 
         return response()->json(['department' => $department, 'subsection_id' => $department->subsections_id]);
     }
+    public function updateSubsection(Request $request)
+    {
+        $request->validate([
+            'subsection_id' => 'required|exists:subsections,id',
+            'section_head' => 'required|string|max:255',
+        ]);
 
-    public function update(Request $request)
-{
-    $subsection = Subsection::find($request->subsection_id);
-    $subsection->section_head = $request->section_head;
-    $subsection->save();
+        $subsection = Subsection::findOrFail($request->subsection_id);
+        $subsection->section_head = $request->section_head;
+        $subsection->save();
 
-    return response()->json(['success' => true]);
-    
-    $department = Department::find($request->department_id);
-    $department->name = $request->name;
-    $department->save();
+        return response()->json(['success' => true, 'subsection' => $subsection]);
+    }
 
-    return response()->json(['success' => true, 'department' => $department]);
-}
+    // Update department
+    public function updateDepartment(Request $request)
+    {
+        $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $department = Department::findOrFail($request->department_id);
+        $department->name = $request->name;
+        $department->save();
+
+        return response()->json(['success' => true, 'department' => $department]);
+    }
 
 }
