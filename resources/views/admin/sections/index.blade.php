@@ -270,5 +270,70 @@ $(document).ready(function () {
         $('#subsection_id').val(subsectionId);
     });
 });
+$(document).ready(function () {
+    // Edit Section Head
+    $('.editSectionHeadBtn').click(function () {
+        var subsectionId = $(this).data('subsection-id');
+        var sectionHead = $(this).data('section-head');
+        $('#edit_subsection_id').val(subsectionId);
+        $('#section_head').val(sectionHead);
+    });
+
+    $('#editSectionHeadForm').submit(function (e) {
+        e.preventDefault();
+        var subsectionId = $('#edit_subsection_id').val();
+        var sectionHead = $('#section_head').val();
+
+        $.ajax({
+            url: "{{ route('admin.subsections.update') }}", // Update with correct route
+            type: 'PUT',
+            data: {
+                subsection_id: subsectionId,
+                section_head: sectionHead,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                alert('Section head updated successfully!');
+                location.reload(); // Reload the page to see the changes
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                alert('An error occurred while updating the section head.');
+            }
+        });
+    });
+
+    // Edit Department
+    $('.editDepartmentBtn').click(function () {
+        var departmentId = $(this).data('department-id');
+        var departmentName = $(this).data('department-name');
+        $('#edit_department_id').val(departmentId);
+        $('#department_name').val(departmentName);
+    });
+
+    $('#editDepartmentForm').submit(function (e) {
+        e.preventDefault();
+        var departmentId = $('#edit_department_id').val();
+        var departmentName = $('#department_name').val();
+
+        $.ajax({
+            url: "{{ route('admin.departments.update') }}", // Update with correct route
+            type: 'PUT',
+            data: {
+                department_id: departmentId,
+                name: departmentName,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                alert('Department updated successfully!');
+                location.reload(); // Reload the page to see the changes
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                alert('An error occurred while updating the department.');
+            }
+        });
+    });
+});
 
 </script>

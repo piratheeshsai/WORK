@@ -44,4 +44,8 @@ Route::group(['prefix' =>'admin', 'as' =>'admin.'], function(){
 
     Route::post('subsections', [SectionController::class, 'storeSubsection'])->name('subsections.store');
 
+    Route::put('/admin/subsections/update', [SectionController::class, 'update'])->name('subsections.update');
+Route::put('/admin/departments/update', [SectionController::class, 'update'])->name('departments.update');
+
+
 });

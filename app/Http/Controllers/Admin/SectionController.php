@@ -50,4 +50,20 @@ class SectionController extends Controller
 
         return response()->json(['department' => $department, 'subsection_id' => $department->subsections_id]);
     }
+
+    public function update(Request $request)
+{
+    $subsection = Subsection::find($request->subsection_id);
+    $subsection->section_head = $request->section_head;
+    $subsection->save();
+
+    return response()->json(['success' => true]);
+    
+    $department = Department::find($request->department_id);
+    $department->name = $request->name;
+    $department->save();
+
+    return response()->json(['success' => true, 'department' => $department]);
+}
+
 }
