@@ -12,7 +12,7 @@
                         Add New Subsection
                     </button>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <div class="row">
                         @foreach ($sections as $section)
                             <div class="col-md-4 mb-3">
@@ -20,7 +20,7 @@
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0">{{ $section->name }}</h5>
                                         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $section->id }}" aria-expanded="false" aria-controls="collapse{{ $section->id }}">
-                                            Toggle
+                                            View
                                         </button>
                                     </div>
                                     <div id="collapse{{ $section->id }}" class="collapse">
@@ -49,11 +49,101 @@
                             </div>
                         @endforeach
                     </div>
+                </div> --}}
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ($sections as $section)
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">{{ $section->name }}</h5>
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $section->id }}" aria-expanded="false" aria-controls="collapse{{ $section->id }}">
+                                            View
+                                        </button>
+                                    </div>
+                                    <div id="collapse{{ $section->id }}" class="collapse">
+                                        <div class="card-body">
+                                            <h6>Subsections</h6>
+                                            <ul class="list-group mb-3">
+                                                @foreach ($section->subsections as $subsection)
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <strong>{{ $subsection->name }}</strong>
+                                                                <br> 
+                                                                Section Head: {{ $subsection->section_head }}
+                                                            </div>
+                                                            <i class="fas fa-pencil-alt editSectionHeadBtn ms-auto" data-subsection-id="{{ $subsection->id }}" data-section-head="{{ $subsection->section_head }}" data-bs-toggle="modal" data-bs-target="#editSectionHeadModal"></i>
+                                                        </div>
+                                                        <br> Departments:
+                                                        <ul id="subsectionDepartments{{ $subsection->id }}">
+                                                            @foreach ($subsection->departments as $department)
+                                                                <li>
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        {{ $department->name }}
+                                                                        <i class="fas fa-pencil-alt editDepartmentBtn ms-auto" data-department-id="{{ $department->id }}" data-department-name="{{ $department->name }}" data-bs-toggle="modal" data-bs-target="#editDepartmentModal"></i>
+                                                                    </div>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                        <button class="btn btn-secondary btn-sm mt-2 createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}">
+                                                            Add New Department
+                                                        </button>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSectionHeadLabel">Edit Section Head</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editSectionHeadForm">
+                        <input type="hidden" id="edit_subsection_id">
+                        <div class="mb-3">
+                            <label for="section_head" class="form-label">Section Head</label>
+                            <input type="text" class="form-control" id="section_head">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    <!-- Edit Department Modal -->
+    <div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editDepartmentLabel">Edit Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editDepartmentForm">
+                        <input type="hidden" id="edit_department_id">
+                        <div class="mb-3">
+                            <label for="department_name" class="form-label">Department Name</label>
+                            <input type="text" class="form-control" id="department_name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Create Subsection Modal -->
     <div class="modal fade" id="createSubsectionModal" tabindex="-1" aria-labelledby="createSubsectionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -110,7 +200,7 @@
             </div>
         </div>
     </div>
-
+    
 </div>
 
 @endsection
@@ -180,4 +270,5 @@ $(document).ready(function () {
         $('#subsection_id').val(subsectionId);
     });
 });
+
 </script>
