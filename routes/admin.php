@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' =>'admin', 'as' =>'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Route for the admin dashboard
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
@@ -46,6 +46,9 @@ Route::group(['prefix' =>'admin', 'as' =>'admin.'], function(){
 
     Route::put('subsections/update', [SectionController::class, 'updateSubsection'])->name('subsections.update');
     Route::put('departments/update', [SectionController::class, 'updateDepartment'])->name('departments.update');
+
+    Route::delete('subsections/{id}', [SectionController::class, 'destroySubsection'])->name('subsections.destroy');
+    Route::delete('departments/{id}', [SectionController::class, 'destroyDepartment'])->name('departments.destroy');
     
 
 });

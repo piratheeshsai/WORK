@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+{{-- @extends('admin.layouts.master')
 
 @section('content')
 
@@ -12,44 +12,6 @@
                         Add New Subsection
                     </button>
                 </div>
-                {{-- <div class="card-body">
-                    <div class="row">
-                        @foreach ($sections as $section)
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0">{{ $section->name }}</h5>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $section->id }}" aria-expanded="false" aria-controls="collapse{{ $section->id }}">
-                                            View
-                                        </button>
-                                    </div>
-                                    <div id="collapse{{ $section->id }}" class="collapse">
-                                        <div class="card-body">
-                                            <h6>Subsections</h6>
-                                            <ul class="list-group mb-3">
-                                                @foreach ($section->subsections as $subsection)
-                                                    <li class="list-group-item">
-                                                        <strong>{{ $subsection->name }}</strong>
-                                                        <br> Section Head: {{ $subsection->section_head }}
-                                                        <br> Departments:
-                                                        <ul id="subsectionDepartments{{ $subsection->id }}">
-                                                            @foreach ($subsection->departments as $department)
-                                                                <li>{{ $department->name }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                        <button class="btn btn-secondary btn-sm mt-2 createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}">
-                                                            Add New Department
-                                                        </button>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div> --}}
                 <div class="card-body">
                     <div class="row">
                         @foreach ($sections as $section)
@@ -70,7 +32,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div>
                                                                 <strong>{{ $subsection->name }}</strong>
-                                                                <br> 
+                                                                <br>
                                                                 Section Head: {{ $subsection->section_head }}
                                                             </div>
                                                             <i class="fas fa-pencil-alt editSectionHeadBtn ms-auto" data-subsection-id="{{ $subsection->id }}" data-section-head="{{ $subsection->section_head }}" data-bs-toggle="modal" data-bs-target="#editSectionHeadModal"></i>
@@ -98,10 +60,240 @@
                             </div>
                         @endforeach
                     </div>
-                </div> 
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    {{-- @extends('admin.layouts.master')
+
+    @section('content') --}}
+
+    {{-- <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                        <h6>Sections</h6>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSubsectionModal">
+                            Add New Subsection
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <!-- Section Name Row -->
+                        <div class="row">
+                            @foreach ($sections as $section)
+                            <div class="col-md-3 mb-3">
+                                <button class="btn btn-secondary w-100 toggle-section" data-bs-toggle="collapse" data-bs-target="#sectionTable{{ $section->id }}" aria-expanded="false">
+                                    {{ $section->name }}
+                                </button>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Full Width Table for Each Section (Collapsible) -->
+                        <div class="accordion" id="sectionAccordion">
+                            @foreach ($sections as $section)
+                            <div class="accordion-item">
+                                <div id="sectionTable{{ $section->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $section->id }}" data-bs-parent="#sectionAccordion">
+                                    <div class="accordion-body">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subsection</th>
+                                                    <th>Departments</th>
+                                                    <th>Section Head</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($section->subsections as $subsection)
+                                                <tr>
+                                                    <td>{{ $subsection->name }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach ($subsection->departments as $department)
+                                                            <li>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    {{ $department->name }}
+                                                                    <!-- Edit Department Button -->
+                                                                    <button class="btn btn-sm btn-primary editDepartmentBtn" data-bs-toggle="modal" data-bs-target="#editDepartmentModal" data-department-id="{{ $department->id }}" data-department-name="{{ $department->name }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </div>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ $subsection->section_head }}</td>
+                                                    <td>
+                                                        <!-- Edit Section Head Button -->
+                                                        <button class="btn btn-primary editSectionHeadBtn" data-bs-toggle="modal" data-bs-target="#editSectionHeadModal" data-subsection-id="{{ $subsection->id }}" data-section-head="{{ $subsection->section_head }}">
+                                                            Edit Section Head
+                                                        </button>
+                                                        <!-- Add New Department Button -->
+                                                        <button class="btn btn-secondary createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}">
+                                                            Add Department
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+
+    @extends('admin.layouts.master')
+
+    @section('content')
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Sections</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($sections as $section)
+                            <div class="col-md-3 mb-3">
+                                <button class="btn btn-secondary w-100 toggle-section" data-bs-toggle="collapse" data-bs-target="#sectionTable{{ $section->id }}" aria-expanded="false">
+                                    {{ $section->name }}
+                                </button>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        <div class="accordion" id="sectionAccordion">
+                            @foreach ($sections as $section)
+                            <div class="accordion-item">
+                                <div id="sectionTable{{ $section->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $section->id }}" data-bs-parent="#sectionAccordion">
+                                    <div class="accordion-body">
+                                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createSubsectionModal" data-section-id="{{ $section->id }}">
+                                            Add New Subsection
+                                        </button>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subsection</th>
+                                                    <th>Departments</th>
+                                                    <th>Section Head</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="subsectionTable{{ $section->id }}">
+                                                @foreach ($section->subsections as $subsection)
+                                                <tr id="subsectionRow{{ $subsection->id }}">
+                                                    <td>{{ $subsection->name }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach ($subsection->departments as $department)
+                                                            <li id="departmentRow{{ $department->id }}">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    {{ $department->name }}
+                                                                    <button class="btn btn-sm btn-primary editDepartmentBtn" data-bs-toggle="modal" data-bs-target="#editDepartmentModal" data-department-id="{{ $department->id }}" data-department-name="{{ $department->name }}">
+                                                                        Edit
+                                                                    </button>
+                                                                    <button class="btn btn-sm btn-danger deleteDepartmentBtn" data-department-id="{{ $department->id }}" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal">
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ $subsection->section_head }}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary editSectionHeadBtn" data-bs-toggle="modal" data-bs-target="#editSectionHeadModal" data-subsection-id="{{ $subsection->id }}" data-section-head="{{ $subsection->section_head }}">
+                                                            Edit Section Head
+                                                        </button>
+                                                        <button class="btn btn-secondary createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}">
+                                                            Add Department
+                                                        </button>
+                                                        <button class="btn btn-sm btn-danger deleteSubsectionBtn" data-subsection-id="{{ $subsection->id }}" data-bs-toggle="modal" data-bs-target="#deleteSubsectionModal">
+                                                            Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+
+<!-- Delete Department Modal -->
+<div class="modal fade" id="deleteDepartmentModal" tabindex="-1" aria-labelledby="deleteDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="deleteDepartmentForm">
+                @csrf
+                @method('DELETE')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDepartmentModalLabel">Delete Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="department_id">
+                    Are you sure you want to delete this department?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Subsection Modal -->
+<div class="modal fade" id="deleteSubsectionModal" tabindex="-1" aria-labelledby="deleteSubsectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="deleteSubsectionForm">
+                @csrf
+                @method('DELETE')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteSubsectionModalLabel">Delete Subsection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="subsection_id">
+                    Are you sure you want to delete this subsection?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
     <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -122,7 +314,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Edit Department Modal -->
     <div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -200,7 +392,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 @endsection
@@ -209,130 +401,181 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
+<script src="{{ asset('js/ajex.js') }}"></script>
+
 <script>
-$(document).ready(function () {
-    // Handle the submission of the subsection form
-    $('#createSubsectionForm').submit(function (e) {
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Pass department data to the Delete Department modal
+    document.querySelectorAll('.deleteDepartmentBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const departmentId = this.dataset.departmentId; // Get the department ID from the button's data attribute
+            document.querySelector('#deleteDepartmentForm input[name="department_id"]').value = departmentId; // Set the department ID in the form
+        });
+    });
+
+    // Handle the delete department form submission
+    document.querySelector('#deleteDepartmentForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent the default form submission
 
-        var formData = $(this).serialize(); // Serialize the form data
+        const departmentId = this.querySelector('input[name="department_id"]').value; // Get the department ID
 
-        $.ajax({
-            url: "{{ route('admin.subsections.store') }}", // Ensure this route is correct
-            type: 'POST',
-            data: formData,
+        // Make an AJAX request to delete the department
+        fetch(`/departments/${departmentId}`, {
+            method: 'DELETE', // Use DELETE method
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Ensure this is set correctly in your Blade template
+                'Content-Type': 'application/json',
             },
-            success: function (response) {
-                $('#createSubsectionModal').modal('hide'); // Hide the modal
-                alert('Subsection added successfully!');
-
-                // Optionally, you can update the UI here to show the new subsection
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText); // Log the error response
-                alert('An error occurred while adding the subsection.');
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the department row from the table
+                document.querySelector(`#departmentRow${departmentId}`).remove(); // Assuming you have a row with this ID
+                // Hide the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteDepartmentModal'));
+                modal.hide();
+            } else {
+                alert('Failed to delete the department.'); // Alert if the deletion failed
             }
-        });
-    });
-
-    // Handle the submission of the department form
-    $('#createDepartmentForm').submit(function (e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        var formData = $(this).serialize(); // Serialize the form data
-
-        $.ajax({
-            url: "{{ route('admin.departments.store') }}", // Ensure this route is correct
-            type: 'POST',
-            data: formData,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                $('#createDepartmentModal').modal('hide'); // Hide the modal
-                alert('Department added successfully!');
-
-                // Update department list dynamically under the selected subsection
-                $('#subsectionDepartments' + response.subsection_id).append(`<li>${response.department.name}</li>`);
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText); // Log the error response
-                alert('An error occurred while adding the department.');
-            }
-        });
-    });
-
-    // Set subsection_id when creating a department
-    $(document).on('click', '.createDepartmentBtn', function () {
-        var subsectionId = $(this).data('subsection-id');
-        $('#subsection_id').val(subsectionId);
-    });
-});
-$(document).ready(function () {
-    // Edit Section Head
-    $('.editSectionHeadBtn').click(function () {
-        var subsectionId = $(this).data('subsection-id');
-        var sectionHead = $(this).data('section-head');
-        $('#edit_subsection_id').val(subsectionId);
-        $('#section_head').val(sectionHead);
-    });
-
-    $('#editSectionHeadForm').submit(function (e) {
-        e.preventDefault();
-        var subsectionId = $('#edit_subsection_id').val();
-        var sectionHead = $('#section_head').val();
-
-        $.ajax({
-            url: "{{ route('admin.subsections.update') }}", // Update with correct route
-            type: 'PUT',
-            data: {
-                subsection_id: subsectionId,
-                section_head: sectionHead,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function (response) {
-                alert('Section head updated successfully!');
-                location.reload(); // Reload the page to see the changes
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-                alert('An error occurred while updating the section head.');
-            }
-        });
-    });
-
-    // Edit Department
-    $('.editDepartmentBtn').click(function () {
-        var departmentId = $(this).data('department-id');
-        var departmentName = $(this).data('department-name');
-        $('#edit_department_id').val(departmentId);
-        $('#department_name').val(departmentName);
-    });
-
-    $('#editDepartmentForm').submit(function (e) {
-        e.preventDefault();
-        var departmentId = $('#edit_department_id').val();
-        var departmentName = $('#department_name').val();
-
-        $.ajax({
-            url: "{{ route('admin.departments.update') }}", // Corrected the route
-            type: 'PUT',
-            data: {
-                department_id: departmentId,
-                name: departmentName,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function (response) {
-                alert('Department updated successfully!');
-                location.reload(); // Reload the page to see the changes
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-                alert('An error occurred while updating the department.');
-            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the department.'); // Alert if there was an error
         });
     });
 });
+
+
+
+
+    var createSubsectionUrl = "{{ route('admin.subsections.store') }}";
+    var createDepartmentUrl = "{{ route('admin.departments.store') }}";
+    var editSectionHeadUrl = "{{ route('admin.subsections.update') }}";
+    var editDepartmentUrl = "{{ route('admin.departments.update') }}";
+    var csrfToken = '{{ csrf_token() }}';
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Ensure only one section's table is expanded at a time
+    document.querySelectorAll('.toggle-section').forEach(button => {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.accordion-collapse').forEach(collapse => {
+                if (collapse !== document.querySelector(this.dataset.bsTarget)) {
+                    collapse.classList.remove('show');
+                }
+            });
+        });
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Pass department data to the Edit Department modal
+    document.querySelectorAll('.editDepartmentBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const departmentId = this.dataset.departmentId; // Get the department ID from the button's data attribute
+            const departmentName = this.dataset.departmentName; // Get the department name from the button's data attribute
+
+            // Set the values in the modal
+            document.querySelector('#edit_department_id').value = departmentId;
+            document.querySelector('#department_name').value = departmentName;
+        });
+    });
+
+    // Handle the edit department form submission
+    document.querySelector('#editDepartmentForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        const departmentId = this.querySelector('#edit_department_id').value; // Get the department ID
+        const departmentName = this.querySelector('#department_name').value; // Get the new department name
+
+        // Check if the department name is not empty
+        if (!departmentName) {
+            alert('Department name cannot be empty.');
+            return; // Exit if department name is empty
+        }
+
+        // Make an AJAX request to update the department
+        fetch(`/departments/${departmentId}`, {
+            method: 'PUT', // Use PUT for updating resources
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Ensure this is set correctly in your Blade template
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: departmentName }) // Send the updated department name
+        })
+        .then(response => {
+            if (response.ok) {
+                // Update the department row in the table
+                const departmentRow = document.querySelector(`#departmentRow${departmentId}`);
+                departmentRow.querySelector('.department-name').textContent = departmentName; // Assuming there's an element with the class 'department-name'
+
+                // Hide the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editDepartmentModal'));
+                modal.hide();
+            } else {
+                alert('Failed to update the department.'); // Show an alert on failure
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating the department.'); // Show an alert on error
+        });
+    });
+});
+
+
+
+    // Pass department data to the Delete Department modal
+
+
+    // Pass subsection data to the Delete Subsection modal
+    document.querySelectorAll('.deleteSubsectionBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            const subsectionId = this.dataset.subsectionId;
+            document.querySelector('#deleteSubsectionModal input[name="subsection_id"]').value = subsectionId;
+        });
+    });
+
+    // Handle the delete department form submission
+
+
+    // Handle the delete subsection form submission
+    document.querySelector('#deleteSubsectionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const subsectionId = this.querySelector('input[name="subsection_id"]').value;
+
+        // Make an AJAX request to delete the subsection
+        fetch(`/subsections/${subsectionId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the subsection row from the table
+                document.querySelector(`#subsectionRow${subsectionId}`).remove();
+                // Hide the modal
+                var modal = bootstrap.Modal.getInstance(document.getElementById('deleteSubsectionModal'));
+                modal.hide();
+            } else {
+                alert('Failed to delete the subsection.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the subsection.');
+        });
+    });
+});
+
+
 </script>
+
