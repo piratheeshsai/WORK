@@ -11,7 +11,14 @@ use Illuminate\Support\Facades\Log;
 
 class WorkOrderController extends Controller
 {
+    public function index()
+    {
+        // Fetch all work orders with pagination
+        $work_order = WorkOrder::with('userDetails')->paginate(10);
 
+        // Pass work orders to the view
+        return view('users.workorder.index', compact('work_order'));
+    }
 
     public function create()
     {
