@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('workorder', [WorkOrderController::class, 'index'])->name('work.index');
     Route::get('workorder/create', [WorkOrderController::class, 'create'])->name('work.create');
 
     // Get subsections based on section ID
