@@ -698,7 +698,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Ensure only one section's table is expanded at a time
     document.querySelectorAll('.toggle-section').forEach(button => {
         button.addEventListener('click', function() {
@@ -708,11 +708,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-    });
+    }):
+});
 
 
 
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Pass department data to the Edit Department modal
     document.querySelectorAll('.editDepartmentBtn').forEach(button => {
         button.addEventListener('click', function() {
@@ -773,7 +774,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Pass subsection data to the Delete Subsection modal
-    document.querySelectorAll('.deleteSubsectionBtn').forEach(button => {
+document.querySelectorAll('.deleteSubsectionBtn').forEach(button => {
         button.addEventListener('click', function() {
             const subsectionId = this.dataset.subsectionId;
             document.querySelector('#deleteSubsectionModal input[name="subsection_id"]').value = subsectionId;
