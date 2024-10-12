@@ -412,7 +412,6 @@
                         </div>
                         @endforeach
                     </div>
-
                     <div class="accordion" id="sectionAccordion">
                         @foreach ($sections as $section)
                         <div class="accordion-item">
@@ -541,6 +540,7 @@
             </div>
             <div class="modal-body">
                 <form id="editSectionHeadForm">
+                    @csrf
                     <input type="hidden" id="edit_subsection_id">
                     <div class="mb-3">
                         <label for="section_head" class="form-label">Section Head</label>
@@ -641,180 +641,13 @@
 
 <script src="{{ asset('js/ajex.js') }}"></script>
 
+
+
 <script>
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Pass department data to the Delete Department modal
-    document.querySelectorAll('.deleteDepartmentBtn').forEach(button => {
-        button.addEventListener('click', function() {
-            const departmentId = this.dataset.departmentId; // Get the department ID from the button's data attribute
-            document.querySelector('#deleteDepartmentForm input[name="department_id"]').value = departmentId; // Set the department ID in the form
-        });
-    });
-
-    // Handle the delete department form submission
-    document.querySelector('#deleteDepartmentForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
-
-        const departmentId = this.querySelector('input[name="department_id"]').value; // Get the department ID
-
-        // Make an AJAX request to delete the department
-        fetch(`/departments/${departmentId}`, {
-            method: 'DELETE', // Use DELETE method
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Ensure this is set correctly in your Blade template
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-                // Remove the department row from the table
-                document.querySelector(`#departmentRow${departmentId}`).remove(); // Assuming you have a row with this ID
-                // Hide the modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteDepartmentModal'));
-                modal.hide();
-            } else {
-                alert('Failed to delete the department.'); // Alert if the deletion failed
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while deleting the department.'); // Alert if there was an error
-        });
-    });
-});
-
-
-
-
     var createSubsectionUrl = "{{ route('admin.subsections.store') }}";
     var createDepartmentUrl = "{{ route('admin.departments.store') }}";
     var editSectionHeadUrl = "{{ route('admin.subsections.update') }}";
     var editDepartmentUrl = "{{ route('admin.departments.update') }}";
     var csrfToken = '{{ csrf_token() }}';
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure only one section's table is expanded at a time
-    document.querySelectorAll('.toggle-section').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.accordion-collapse').forEach(collapse => {
-                if (collapse !== document.querySelector(this.dataset.bsTarget)) {
-                    collapse.classList.remove('show');
-                }
-            });
-        });
-    }):
-});
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Pass department data to the Edit Department modal
-    document.querySelectorAll('.editDepartmentBtn').forEach(button => {
-        button.addEventListener('click', function() {
-            const departmentId = this.dataset.departmentId; // Get the department ID from the button's data attribute
-            const departmentName = this.dataset.departmentName; // Get the department name from the button's data attribute
-
-            // Set the values in the modal
-            document.querySelector('#edit_department_id').value = departmentId;
-            document.querySelector('#department_name').value = departmentName;
-        });
-    });
-
-    // Handle the edit department form submission
-    document.querySelector('#editDepartmentForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the form from submitting normally
-
-        const departmentId = this.querySelector('#edit_department_id').value; // Get the department ID
-        const departmentName = this.querySelector('#department_name').value; // Get the new department name
-
-        // Check if the department name is not empty
-        if (!departmentName) {
-            alert('Department name cannot be empty.');
-            return; // Exit if department name is empty
-        }
-
-        // Make an AJAX request to update the department
-        fetch(`/departments/${departmentId}`, {
-            method: 'PUT', // Use PUT for updating resources
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Ensure this is set correctly in your Blade template
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: departmentName }) // Send the updated department name
-        })
-        .then(response => {
-            if (response.ok) {
-                // Update the department row in the table
-                const departmentRow = document.querySelector(`#departmentRow${departmentId}`);
-                departmentRow.querySelector('.department-name').textContent = departmentName; // Assuming there's an element with the class 'department-name'
-
-                // Hide the modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('editDepartmentModal'));
-                modal.hide();
-            } else {
-                alert('Failed to update the department.'); // Show an alert on failure
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while updating the department.'); // Show an alert on error
-        });
-    });
-});
-
-
-
-    // Pass department data to the Delete Department modal
-
-
-    // Pass subsection data to the Delete Subsection modal
-document.querySelectorAll('.deleteSubsectionBtn').forEach(button => {
-        button.addEventListener('click', function() {
-            const subsectionId = this.dataset.subsectionId;
-            document.querySelector('#deleteSubsectionModal input[name="subsection_id"]').value = subsectionId;
-        });
-    });
-
-    // Handle the delete department form submission
-
-
-    // Handle the delete subsection form submission
-    document.querySelector('#deleteSubsectionForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const subsectionId = this.querySelector('input[name="subsection_id"]').value;
-
-        // Make an AJAX request to delete the subsection
-        fetch(`/subsections/${subsectionId}`, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-                // Remove the subsection row from the table
-                document.querySelector(`#subsectionRow${subsectionId}`).remove();
-                // Hide the modal
-                var modal = bootstrap.Modal.getInstance(document.getElementById('deleteSubsectionModal'));
-                modal.hide();
-            } else {
-                alert('Failed to delete the subsection.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while deleting the subsection.');
-        });
-    });
-});
-
-
 </script>
 

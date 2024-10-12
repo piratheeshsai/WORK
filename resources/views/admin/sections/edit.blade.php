@@ -1,4 +1,4 @@
-{{-- @extends('admin.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 <div class="container-fluid py-4">
@@ -17,4 +17,4 @@
         </div>
     </div>
 </div>
-@endsection --}}
+@endsection
