@@ -78,31 +78,12 @@ class SectionController extends Controller
 
         return response()->json(['success' => true, 'department' => $department]);
     }
-    public function destroyDepartment($id)
+    
+
+
+    public function destroy(Department $department)
     {
-        $department = Department::find($id); // Use find to get the department by ID
-
-        if (!$department) {
-            return response()->json(['message' => 'Department not found.'], 404); // Return 404 if not found
-        }
-
-        $department->delete(); // Delete the department
-
-        return response()->json(['message' => 'Department deleted successfully.']);
+        $department->delete();
+        return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
     }
-
-
-    public function destroySubsection($id)
-    {
-        try {
-            $subsection = Subsection::findOrFail($id);
-            $subsection->delete();
-
-            return response()->json(['message' => 'Subsection deleted successfully.']);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Error deleting subsection: ' . $e->getMessage()], 500);
-        }
-    }
-
-
-}
+ }

@@ -32,7 +32,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Route to handle user deletion
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+    Route::delete('sections/{department}', [SectionController::class, 'destroy'])->name('department.destroy');
 
+
+    
 
 
 
@@ -49,6 +52,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::delete('subsections/{id}', [SectionController::class, 'destroySubsection'])->name('subsections.destroy');
     Route::delete('departments/{id}', [SectionController::class, 'destroyDepartment'])->name('departments.destroy');
-    
+
 
 });
