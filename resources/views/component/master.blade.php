@@ -43,7 +43,7 @@
 
     {{-- Sidevar start --}}
 
-    @include('users.component.menu')
+    @include('component.menu')
 
     {{-- sidevar end --}}
 
@@ -53,7 +53,7 @@
 
         {{-- Navbar start --}}
 
-        @include('users.component.navbar')
+        @include('component.navbar')
 
         <!-- End Navbar -->
 
@@ -100,7 +100,7 @@
 
     {{-- Settings start --}}
 
-    @include('users.component.setting')
+    @include('component.setting')
 
 
     {{-- End setting --}}

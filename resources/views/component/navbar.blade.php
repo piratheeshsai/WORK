@@ -129,17 +129,17 @@
                     <i class="fa-solid fa-right-from-bracket cursor-pointer"></i>
                 </a>
             </li>
-
+            
             <!-- Hidden Logout Form -->
             <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                 @csrf
             </form>
-
+            
             <script>
                 document.getElementById('logout-btn').addEventListener('click', function(event) {
                     // Prevent the default action
                     event.preventDefault();
-
+            
                     // Show SweetAlert confirmation for logout
                     Swal.fire({
                         title: 'Are you sure you want to log out?',
@@ -169,6 +169,7 @@
                     });
                 });
             </script>            
+
         </ul>
     </div>
 </div>
