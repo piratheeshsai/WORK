@@ -1,10 +1,10 @@
-var hamburgerBtn = document.querySelector('.hamburger-btn');
-var sideBar = document.querySelector('.sidebar');
+// var hamburgerBtn = document.querySelector('.hamburger-btn');
+// var sideBar = document.querySelector('.sidebar');
 
-hamburgerBtn.addEventListener('click', sidebarToggle);
-function sidebarToggle() {
-  sideBar.classList.toggle('active');
-};
+// hamburgerBtn.addEventListener('click', sidebarToggle);
+// function sidebarToggle() {
+//   sideBar.classList.toggle('active');
+// };
 
 // const categorySelect = document.getElementById('category');
 // const facultyDepartments = document.getElementById('facultyDepartments');

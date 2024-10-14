@@ -116,6 +116,7 @@
     <script src="{{ asset('js/argon-dashboard.min.js') }}"></script>
     <script src="{{ asset('js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('js/alert.js') }}"></script>
+    
 
 
 

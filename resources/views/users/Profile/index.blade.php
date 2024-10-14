@@ -124,3 +124,4 @@
         </div>
     </div>
 @endsection
+<script src="{{ asset('js/home.js') }}"></script>

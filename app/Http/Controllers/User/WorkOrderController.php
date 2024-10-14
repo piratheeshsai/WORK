@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use App\Models\workOrder;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
+
 
 class WorkOrderController extends Controller
 {
@@ -63,7 +64,7 @@ $year = date('Y');
 
 
 // Get the work type
-$workType = strtoupper($request->work_type); // Uppercasing the work type for consistency
+$workType = strtoupper($request->work_type); // the work type for consistency
 
 // Fetch the latest work order for the current year and work type
 $latestWorkOrder = workOrder::whereYear('created_at', $year)
