@@ -45,7 +45,9 @@
                                                 <tbody id="subsectionTable{{ $section->id }}">
                                                     @foreach ($section->subsections as $subsection)
                                                         <tr id="subsectionRow{{ $subsection->id }}">
-                                                            <td>{{ $subsection->name }}</td>
+                                                            <td>{{ $subsection->name }}  <button
+                                                                class="btn btn-danger btn-sm delete-btn">Delete</button></td>
+
                                                             <td>
                                                                 <ul class="list-unstyled">
                                                                     @foreach ($subsection->departments as $department)
@@ -63,8 +65,6 @@
 
 
                                                                                 </button>
-
-
 
 
                                                                                 @if ($department)
@@ -105,6 +105,9 @@
                                                                         data-subsection-id="{{ $subsection->id }}">
                                                                         Add Department
                                                                     </button>
+
+
+
                                                                     <button
                                                                         class="btn btn-sm btn-danger deleteSubsectionBtn"
                                                                         data-subsection-id="{{ $subsection->id }}"
@@ -112,6 +115,7 @@
                                                                         data-bs-target="#deleteSubsectionModal">
                                                                         Delete
                                                                     </button>
+
                                                                 </div>
                                                             </td>
                                                         </tr>
