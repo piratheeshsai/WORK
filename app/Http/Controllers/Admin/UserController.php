@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical'])],
+            'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical','Recommender'])],
             'password' => 'required|string|min:8|confirmed',
             'userID' => 'required|string|unique:users,userID|max:50', // Include userID validation
         ]);
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical'])],
+            'role' => ['required', Rule::in(['Admin', 'User', 'Engineer', 'Civil', 'Electrical','Recommender'])],
             'password' => 'nullable|string|min:8|confirmed',
             'userID' => ['required', 'string', 'max:50', Rule::unique('users', 'userID')->ignore($user->getKey(), $user->getKeyName())], // Adjusted to handle userID
         ]);

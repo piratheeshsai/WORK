@@ -1,3 +1,29 @@
+// $(document).ready(function () {
+//     // Handle the submission of the subsection form
+//     $('#createSubsectionForm').submit(function (e) {
+//         e.preventDefault(); // Prevent the default form submission
+
+//         var formData = $(this).serialize(); // Serialize the form data
+
+//         $.ajax({
+//             url: createSubsectionUrl, // Ensure this route is correct
+//             type: 'POST',
+//             data: formData,
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             success: function (response) {
+//                 $('#createSubsectionModal').modal('hide'); // Hide the modal
+//                 alert('Subsection added successfully!');
+//             },
+//             error: function (xhr) {
+//                 console.log(xhr.responseText); // Log the error response
+//                 alert('An error occurred while adding the subsection.');
+//             }
+//         });
+//     });
+
+
 $(document).ready(function () {
     // Handle the submission of the subsection form
     $('#createSubsectionForm').submit(function (e) {
@@ -10,18 +36,32 @@ $(document).ready(function () {
             type: 'POST',
             data: formData,
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Set the CSRF token
             },
             success: function (response) {
                 $('#createSubsectionModal').modal('hide'); // Hide the modal
                 alert('Subsection added successfully!');
+                // Optionally, update the UI to show the new subsection
+                // For example, you can append it to a list or table here
             },
             error: function (xhr) {
                 console.log(xhr.responseText); // Log the error response
                 alert('An error occurred while adding the subsection.');
+                // Optionally, handle validation errors here
+                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    const errors = xhr.responseJSON.errors;
+                    const errorMessage = Object.values(errors).flat().join('\n');
+                    alert(errorMessage); // Show validation error messages
+                }
             }
         });
     });
+});
+
+
+
+
+
 
     // Handle the submission of the department form
     $('#createDepartmentForm').submit(function (e) {
@@ -117,4 +157,4 @@ $(document).ready(function () {
             }
         });
     });
-});
+

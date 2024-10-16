@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class workOrder extends Model
 {
     use HasFactory;
-
     protected $table = 'work_order';
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -28,4 +27,8 @@ public function userDetails()
 {
     return $this->belongsTo(UserDetail::class, 'EmployeeId', 'EmployeeId');
 }
+public function recommender() {
+    return $this->belongsTo(User::class, 'recommender_id', 'userID');
+}
+
 }
