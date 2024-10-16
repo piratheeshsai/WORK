@@ -330,7 +330,6 @@
         </div>
     </div>
 
->>>>>>> d302beb2007b5286cc7a9c9dcfa01f2b710c9bdc
     <!-- Edit Section Head Modal -->
     <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel"
         aria-hidden="true">
