@@ -203,7 +203,7 @@
                                             <tbody id="subsectionTable{{ $section->id }}">
                                                 @foreach ($section->subsections as $subsection)
                                                     <tr id="subsectionRow{{ $subsection->id }}">
-                                                        <!-- Subsection Column -->
+                                                        <!-- Subsection Column jhs -->
                                                         <td>
                                                             <div class="responsive-wrap">
                                                                 <span>{{ $subsection->name }}</span>
@@ -300,14 +300,6 @@
         </div>
     </div>
 </div>
-
-    
-    
-    
-    
-    
-    
-    
 
     <!-- Delete Subsection Modal -->
     <div class="modal fade" id="deleteSubsectionModal" tabindex="-1" aria-labelledby="deleteSubsectionModalLabel"
