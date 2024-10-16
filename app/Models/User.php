@@ -65,6 +65,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    public function subsections()
+    {
+        return $this->hasMany(Subsection::class, 'recommender_id', 'userID');
+    }
+    public static function getRecommenders()
+    {
+        return self::where('role', 'recommender')->get();
+    }
 
 }

@@ -49,6 +49,7 @@ class UserProfileController extends Controller
     'section' => 'required|exists:section,id', // Change 'sections' to 'section'
     'subsection' => 'nullable|exists:subsections,id',
     'department' => 'nullable|exists:departments,id',
+    'recommender_id' => 'nullable|string|exists:users,userID',
 ]);
     // Update the 'users' table
     $user->update(['name' => $request->name]);

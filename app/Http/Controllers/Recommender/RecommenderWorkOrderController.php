@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class RecommenderWorkOrderController extends Controller
 {
     public function index(){
+        
         return view('recommender.workOrder.index');
     }
 }

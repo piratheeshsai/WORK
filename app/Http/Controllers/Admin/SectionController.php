@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Section;
 use App\Models\Subsection;
 use App\Models\Department;
+use App\Models\User;
 
 class SectionController extends Controller
 {
@@ -16,21 +17,24 @@ class SectionController extends Controller
         // Fetch all sections with subsections and departments using eager loading
         $sections = Section::with('subsections.departments')->get();
         $subsections = Subsection::with('departments')->get();
-        return view('admin.sections.index', compact('sections','subsections'));
+
+        $recommenders = User::where('role', 'recommender')->get();
+        return view('admin.sections.index', compact('sections', 'subsections','recommenders'));
     }
 
     // Store a new subsection
     public function storeSubsection(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'section_head' => 'required|string|max:255',
-        'section_id' => 'required|exists:section,id', // Make sure the table name is correct
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'section_head' => 'required|string|max:255',
+            'section_id' => 'required|exists:section,id',
+            'recommender_id' => 'nullable|exists:users,userID', // Make sure the table name is correct
+        ]);
 
-    $subsection = Subsection::create($request->all());
-    return response()->json(['subsection' => $subsection]);
-}
+        $subsection = Subsection::create($request->all());
+        return response()->json(['subsection' => $subsection]);
+    }
 
 
 
@@ -78,12 +82,33 @@ class SectionController extends Controller
 
         return response()->json(['success' => true, 'department' => $department]);
     }
-    
 
 
-    public function destroy(Department $department)
+
+    // public function destroy(Department $department)
+    // {
+    //     $department->delete();
+    //     return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
+    // }
+
+    public function destroy($type, $id)
     {
-        $department->delete();
-        return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
+        if ($type == 'department') {
+            $department = Department::find($id);
+            if ($department) {
+                $department->delete();
+                return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
+            }
+            return redirect()->back()->with('error', 'Department not found.');
+        } elseif ($type == 'subsection') {
+            $subsection = Subsection::find($id);
+            if ($subsection) {
+                $subsection->delete();
+                return redirect()->route('admin.sections.index')->with('success', 'Subsection deleted successfully.');
+            }
+            return redirect()->back()->with('error', 'Subsection not found.');
+        }
+
+        return redirect()->back()->with('error', 'Invalid request.');
     }
- }
+}

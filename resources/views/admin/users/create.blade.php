@@ -46,6 +46,9 @@
                                         <option value="Electrical" {{ old('role') == 'Electrical' ? 'selected' : '' }}>
                                             Electrical
                                         </option>
+                                        <option value="Recommender" {{ old('role') == 'Recommender' ? 'selected' : '' }}>
+                                            Recommender
+                                        </option>
                                     </select>
                                 </div>
 
@@ -71,5 +74,5 @@
         </div>
     </div>
 
-    
+
 @endsection

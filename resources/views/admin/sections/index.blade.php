@@ -39,15 +39,33 @@
                                                         <th>Subsection</th>
                                                         <th>Departments</th>
                                                         <th>Section Head</th>
-                                                        <th>Actions</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody id="subsectionTable{{ $section->id }}">
                                                     @foreach ($section->subsections as $subsection)
                                                         <tr id="subsectionRow{{ $subsection->id }}">
-                                                            <td>{{ $subsection->name }}  <button
-                                                                class="btn btn-danger btn-sm delete-btn">Delete</button></td>
+                                                            <td>{{ $subsection->name }}
 
+                                                                <div>
+                                                                    @if ($subsection)
+                                                                        <form action="{{ route('admin.delete', ['type' => 'subsection', 'id' => $subsection->id]) }}" method="POST" style="display:inline;" class="delete-form">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button class="btn btn-danger btn-sm delete-btn" style="display:none;">Delete</button>
+                                                                        </form>
+                                                                    @else
+                                                                        <p>Department not found</p>
+                                                                    @endif
+
+                                                                    <button class="btn btn-secondary createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}" style="display:none;">
+                                                                        Add Department
+                                                                    </button>
+
+                                                                    <button class="btn btn-link text-secondary mb-0 toggle-buttons" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-ellipsis-v text-xs"></i>
+                                                                    </button>
+                                                                </div>
                                                             <td>
                                                                 <ul class="list-unstyled">
                                                                     @foreach ($subsection->departments as $department)
@@ -68,8 +86,8 @@
 
 
                                                                                 @if ($department)
-                                                                                    <form
-                                                                                        action="{{ route('admin.department.destroy', $department->id) }}"
+                                                                                    <form <form
+                                                                                        action="{{ route('admin.delete', ['type' => 'department', 'id' => $department->id]) }}"
                                                                                         method="POST"
                                                                                         style="display:inline;"
                                                                                         class="delete-form">
@@ -82,42 +100,28 @@
                                                                                     <p>Department not found</p>
                                                                                 @endif
 
-
+                                                                                <button
+                                                                                    class="btn btn-link text-secondary mb-0"
+                                                                                    aria-haspopup="true"
+                                                                                    aria-expanded="false">
+                                                                                    <i class="fa fa-ellipsis-v text-xs"></i>
+                                                                                </button>
 
                                                                             </div>
                                                                         </li>
                                                                     @endforeach
                                                                 </ul>
                                                             </td>
-                                                            <td>{{ $subsection->section_head }}</td>
-                                                            <td>
-                                                                <div class="btn-group">
-                                                                    <button class="btn btn-primary editSectionHeadBtn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editSectionHeadModal"
-                                                                        data-subsection-id="{{ $subsection->id }}"
-                                                                        data-section-head="{{ $subsection->section_head }}">
-                                                                        Edit Section Head
-                                                                    </button>
-                                                                    <button class="btn btn-secondary createDepartmentBtn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#createDepartmentModal"
-                                                                        data-subsection-id="{{ $subsection->id }}">
-                                                                        Add Department
-                                                                    </button>
-
-
-
-                                                                    <button
-                                                                        class="btn btn-sm btn-danger deleteSubsectionBtn"
-                                                                        data-subsection-id="{{ $subsection->id }}"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteSubsectionModal">
-                                                                        Delete
-                                                                    </button>
-
-                                                                </div>
+                                                            <td>{{ $subsection->section_head }}
+                                                                <button class="btn btn-primary editSectionHeadBtn"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editSectionHeadModal"
+                                                                    data-subsection-id="{{ $subsection->id }}"
+                                                                    data-section-head="{{ $subsection->section_head }}">
+                                                                    Edit Section Head
+                                                                </button>
                                                             </td>
+
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -132,34 +136,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <!-- Delete Subsection Modal -->
-    <div class="modal fade" id="deleteSubsectionModal" tabindex="-1" aria-labelledby="deleteSubsectionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="deleteSubsectionForm">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteSubsectionModalLabel">Delete Subsection</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="subsection_id">
-                        Are you sure you want to delete this subsection?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- Edit Section Head Modal -->
     <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel"
         aria-hidden="true">
@@ -208,7 +184,7 @@
     </div>
 
     <!-- Create Subsection Modal -->
-    <div class="modal fade" id="createSubsectionModal" tabindex="-1" aria-labelledby="createSubsectionModalLabel"
+    {{-- <div class="modal fade" id="createSubsectionModal" tabindex="-1" aria-labelledby="createSubsectionModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -235,12 +211,70 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="recommender_id" class="form-label">Recommender</label>
+                            <select name="recommender_id" class="form-select" required>
+                                @foreach($recommenders as $recommender)
+                                    <option value="{{ $recommender->id }}" {{ $subsection->recommender_id == $recommender->id ? 'selected' : '' }}>
+                                        {{ $recommender->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Add Subsection</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
+
+    <!-- Modal for Adding New Subsection -->
+<div class="modal fade" id="createSubsectionModal" tabindex="-1" aria-labelledby="createSubsectionModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h5 class="modal-title" id="createSubsectionModalLabel">Add New Subsection</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+           <form id="createSubsectionForm">
+               @csrf
+               <div class="mb-3">
+                   <label for="subsectionName" class="form-label">Subsection Name</label>
+                   <input type="text" name="name" class="form-control" id="subsectionName" required>
+               </div>
+               <div class="mb-3">
+                   <label for="sectionHead" class="form-label">Section Head</label>
+                   <input type="text" name="section_head" class="form-control" id="sectionHead" required>
+               </div>
+               <div class="mb-3">
+                   <label for="section_id" class="form-label">Select Section</label>
+                   <select name="section_id" class="form-select" id="section_id" required>
+                       @foreach ($sections as $section)
+                           <option value="{{ $section->id }}">{{ $section->name }}</option>
+                       @endforeach
+                   </select>
+               </div>
+
+
+               <div class="mb-3">
+                <label for="recommender_id" class="form-label">Recommender</label>
+                <select name="recommender_id" id="recommender_id" class="form-select" >
+                    @foreach($recommenders as $recommender)
+                        <option value="{{ $recommender->userID }}">{{ $recommender->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+               <button type="submit" class="btn btn-primary">Add Subsection</button>
+           </form>
+       </div>
+   </div>
+</div>
+</div>
+
 
     <!-- Create Department Modal -->
     <div class="modal fade" id="createDepartmentModal" tabindex="-1" aria-labelledby="createDepartmentModalLabel"
@@ -298,6 +332,14 @@
                 });
             });
         });
+
+
+        $(document).ready(function() {
+        $('.toggle-buttons').on('click', function() {
+            // Toggle visibility of the delete and add department buttons
+            $(this).closest('div').find('.delete-btn, .createDepartmentBtn').toggle();
+        });
+    });
     </script>
 @endsection
 
@@ -308,4 +350,8 @@
     var editSectionHeadUrl = "{{ route('admin.subsections.update') }}";
     var editDepartmentUrl = "{{ route('admin.departments.update') }}";
     var csrfToken = '{{ csrf_token() }}';
+
+   var storeSubsectionUrl = "{{ route('admin.subsections.store') }}";
 </script>
+
+<script src="{{ asset('js/ajex.js') }}"></script>
