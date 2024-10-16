@@ -261,7 +261,7 @@
                                                                                 </button>
                                                                             </li>
                                                                             <li>
-                                                                                <form action="{{ route('admin.department.destroy', $department->id) }}" 
+                                                                                <form action="{{ route('admin.departments.destroy', $department->id) }}" 
                                                                                     method="POST" 
                                                                                     class="delete-form">
                                                                                     @csrf
