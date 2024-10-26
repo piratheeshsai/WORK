@@ -182,6 +182,14 @@
                 otherWorkType.style.display = 'none';
             }
         });
+
+
+        // Check if any event listener has this pattern:
+document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    // Custom JavaScript logic
+});
+
     </script>
 
 

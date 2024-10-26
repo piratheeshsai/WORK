@@ -42,9 +42,11 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class);
     }
     public function userDetails()
-{
-    return $this->hasOne(UserDetail::class, 'userID', 'userID');
-}
+    {
+        return $this->hasOne(UserDetail::class, 'userID', 'userID');
+    }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

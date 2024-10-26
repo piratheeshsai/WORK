@@ -55,7 +55,8 @@ class RouteServiceProvider extends ServiceProvider
                 Route::middleware('web','auth','role:Civil')
                 ->group(base_path('routes/civil.php'));
 
-                Route::middleware('web','auth','role:Recommender')
+                
+                Route::middleware(['web', 'auth', 'role:Recommender'])
                 ->group(base_path('routes/recommender.php'));
         });
     }

@@ -43,23 +43,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($workOrders as $workOrder)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-3">
                                                 <div class="my-auto">
-                                                    <h6 class="mb-0 text-sm">Spot</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $workOrder->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->work_type }}</p>
                                         </td>
                                         <td>
-                                            <span class="text-xs font-weight-bold">working</span>
+                                            <span class="text-xs font-weight-bold">{{ $workOrder->priority }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <div class="d-flex align-items-center justify-content-center">
-                                                <span class="me-2 text-xs font-weight-bold">60%</span>
+                                                <span class="me-2 text-xs font-weight-bold"></span>
                                                 <div>
                                                     <div class="progress">
                                                         <div class="progress-bar bg-gradient-info" role="progressbar"
@@ -71,20 +72,56 @@
                                         </td>
                                         <td class="align-middle">
 
-                                            <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p>
 
                                         </td>
-                                        <td >
+                                        <td>
                                             <button class="btn btn-link text-secondary mb-0">
                                                 <i class="fa fa-ellipsis-v text-xs"></i>
                                             </button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            <div class="d-flex  justify-content-center">
+                                {{ $workOrders->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endsection
+    @endsection
+
+
+    {{-- <tbody>
+        @foreach($workOrders as $workOrder)
+            <tr>
+                <td>
+                    <div class="d-flex px-3">
+                        <div class="my-auto">
+                            <h6 class="mb-0 text-sm">{{ $workOrder->id }}</h6> <!-- Work Order Number -->
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p class="text-sm font-weight-bold mb-0">{{ $workOrder->work_type }}</p> <!-- Work Type -->
+                </td>
+                <td>
+                    <span class="text-xs font-weight-bold">{{ ucfirst($workOrder->priority) }}</span> <!-- Priority -->
+                </td>
+                <td class="align-middle text-center">
+                    <span class="text-xs font-weight-bold">{{ $workOrder->status }}</span> <!-- Status -->
+                </td>
+                <td class="align-middle">
+                    <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p> <!-- Date -->
+                </td>
+                <td>
+                    <button class="btn btn-link text-secondary mb-0">
+                        <i class="fa fa-ellipsis-v text-xs"></i>
+                    </button>
+                </td>
+            </tr>
+        @endforeach
+    </tbody> --}}

@@ -38,23 +38,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($workOrders as $workOrder)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-3">
                                                 <div class="my-auto">
-                                                    <h6 class="mb-0 text-sm">Spot</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $workOrder->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->id }}</p>
                                         </td>
                                         <td>
-                                            <span class="text-xs font-weight-bold">working</span>
+                                            <span class="text-xs font-weight-bold">{{ $workOrder->id }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <div class="d-flex align-items-center justify-content-center">
-                                                <span class="me-2 text-xs font-weight-bold">60%</span>
+                                                <span class="me-2 text-xs font-weight-bold"></span>
                                                 <div>
                                                     <div class="progress">
                                                         <div class="progress-bar bg-gradient-info" role="progressbar"
@@ -65,12 +66,13 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->id }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="badge badge-sm bg-gradient-success">View</span>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

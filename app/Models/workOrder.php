@@ -20,6 +20,7 @@ class workOrder extends Model
         'priority',
         'complain',
         'EmployeeId',
+        'recommender_id'
     ];
 
 

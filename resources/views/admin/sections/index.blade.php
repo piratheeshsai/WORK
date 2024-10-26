@@ -170,9 +170,9 @@
                     <div class="row">
                         @foreach ($sections as $section)
                             <div class="col-md-3 mb-3">
-                                <button class="btn btn-secondary w-100 toggle-section" 
-                                    data-bs-toggle="collapse" 
-                                    data-bs-target="#sectionTable{{ $section->id }}" 
+                                <button class="btn btn-secondary w-100 toggle-section"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#sectionTable{{ $section->id }}"
                                     aria-expanded="false">
                                     {{ $section->name }}
                                 </button>
@@ -183,14 +183,14 @@
                     <div class="accordion" id="sectionAccordion">
                         @foreach ($sections as $section)
                             <div class="accordion-item">
-                                <div id="sectionTable{{ $section->id }}" class="accordion-collapse collapse" 
-                                    aria-labelledby="heading{{ $section->id }}" 
+                                <div id="sectionTable{{ $section->id }}" class="accordion-collapse collapse"
+                                    aria-labelledby="heading{{ $section->id }}"
                                     data-bs-parent="#sectionAccordion">
                                     <div class="accordion-body">
                                         <div class="d-flex justify-content-end mb-3">
-                                            <button class="btn btn-primary" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#createSubsectionModal" 
+                                            <button class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#createSubsectionModal"
                                                 data-section-id="{{ $section->id }}">
                                                 Add New Subsection
                                             </button>
@@ -211,17 +211,17 @@
                                                         <td>
                                                             <div class="responsive-wrap">
                                                                 <span>{{ $subsection->name }}</span>
-                                                                <button class="btn btn-sm btn-secondary dropdown-toggle" 
-                                                                    type="button" 
-                                                                    data-bs-toggle="dropdown" 
+                                                                <button class="btn btn-sm btn-secondary dropdown-toggle"
+                                                                    type="button"
+                                                                    data-bs-toggle="dropdown"
                                                                     aria-expanded="false">
                                                                     View
                                                                 </button>
                                                                 <ul class="dropdown-menu">
                                                                     <li>
-                                                                        <button class="dropdown-item deleteSubsectionBtn" 
-                                                                            data-bs-toggle="modal" 
-                                                                            data-bs-target="#deleteSubsectionModal" 
+                                                                        <button class="dropdown-item deleteSubsectionBtn"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#deleteSubsectionModal"
                                                                             data-subsection-id="{{ $subsection->id }}">
                                                                             Delete Subsection
                                                                         </button>
@@ -236,33 +236,33 @@
                                                                 @foreach ($subsection->departments as $department)
                                                                     <li class="responsive-wrap mb-2">
                                                                         <span>{{ $department->name }}</span>
-                                                                        <button class="btn btn-sm btn-primary dropdown-toggle" 
-                                                                            type="button" 
-                                                                            data-bs-toggle="dropdown" 
+                                                                        <button class="btn btn-sm btn-primary dropdown-toggle"
+                                                                            type="button"
+                                                                            data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
                                                                             View
                                                                         </button>
                                                                         <ul class="dropdown-menu">
                                                                             <li>
-                                                                                <button class="dropdown-item editDepartmentBtn" 
-                                                                                    data-bs-toggle="modal" 
-                                                                                    data-bs-target="#editDepartmentModal" 
-                                                                                    data-department-id="{{ $department->id }}" 
+                                                                                <button class="dropdown-item editDepartmentBtn"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#editDepartmentModal"
+                                                                                    data-department-id="{{ $department->id }}"
                                                                                     data-department-name="{{ $department->name }}">
                                                                                     Edit Department
                                                                                 </button>
                                                                             </li>
                                                                             <li>
-                                                                                <button class="dropdown-item" 
-                                                                                    data-bs-toggle="modal" 
-                                                                                    data-bs-target="#createDepartmentModal" 
+                                                                                <button class="dropdown-item"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#createDepartmentModal"
                                                                                     data-subsection-id="{{ $subsection->id }}">
                                                                                     Create Department
                                                                                 </button>
                                                                             </li>
                                                                             <li>
-                                                                                <form action="{{ route('admin.departments.destroy', $department->id) }}" 
-                                                                                    method="POST" 
+                                                                                <form action="{{ route('admin.departments.destroy', $department->id) }}"
+                                                                                    method="POST"
                                                                                     class="delete-form">
                                                                                     @csrf
                                                                                     @method('DELETE')
@@ -281,10 +281,10 @@
                                                         <td>
                                                             <div class="responsive-wrap">
                                                                 <span>{{ $subsection->section_head }}</span>
-                                                                <button class="btn btn-sm btn-primary editSectionHeadBtn" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#editSectionHeadModal" 
-                                                                    data-subsection-id="{{ $subsection->id }}" 
+                                                                <button class="btn btn-sm btn-primary editSectionHeadBtn"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editSectionHeadModal"
+                                                                    data-subsection-id="{{ $subsection->id }}"
                                                                     data-section-head="{{ $subsection->section_head }}">
                                                                     Edit
                                                                 </button>
@@ -303,8 +303,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
+
 </div>
 
     <!-- Delete Subsection Modal -->
@@ -332,7 +331,6 @@
         </div>
     </div>
 
->>>>>>> d302beb2007b5286cc7a9c9dcfa01f2b710c9bdc
     <!-- Edit Section Head Modal -->
     <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel"
         aria-hidden="true">

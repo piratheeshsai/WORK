@@ -4,43 +4,51 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Section;
-use App\Models\WorkOrder; // Note: Make sure you use the correct casing for the model
+use App\Models\Subsection;
+use App\Models\WorkOrder;
 use App\Models\UserDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+
 
 class WorkOrderController extends Controller
 {
     public function index()
     {
-        // Fetch all work orders with pagination
-        $work_order = WorkOrder::with('userDetails')->paginate(10);
-        $user = auth()->user();
+        $user = auth()->user(); // Get the authenticated user
 
-        // Get user details
+        // Fetch user details to get EmployeeId
         $userDetails = UserDetail::where('userID', $user->userID)->first();
 
-        // Get work orders assigned to the logged-in recommender
-        $workOrders = WorkOrder::where('recommender_id', $user->userID)->get();
+        if (!$userDetails) {
+            // Handle the case where user details are not found
+            return redirect()->back()->withErrors(['message' => 'User details not found.']);
+        }
 
-        // Pass work orders and userDetails to the view
-        return view('users.workorder.index', compact('work_order', 'userDetails'));
+        // Fetch work orders associated with the logged-in user's EmployeeId
+        $workOrders = WorkOrder::where('EmployeeId', $userDetails->EmployeeId)->paginate(10); // Use paginate to manage large data sets
+
+        return view('users.workorder.index', compact('workOrders'));
     }
+
+
 
     public function create()
     {
         $user = auth()->user();
 
-        // Fetch all sections to be used in the form
-        $section = Section::all();
+        // Fetch all sections for the form
+        $sections = Section::all();
 
         // Fetch user details
         $userDetails = UserDetail::where('userID', $user->userID)->first();
 
-        // Pass the sections and userDetails to the view
-        return view('users.workorder.create', compact('section', 'userDetails'));
+        return view('users.workorder.create', compact('sections', 'userDetails'));
     }
+
+
 
     public function store(Request $request)
     {
@@ -51,32 +59,60 @@ class WorkOrderController extends Controller
             'complain' => 'required|string|max:1000',
         ]);
 
-        // Get the authenticated user's details
+        // Get authenticated user details
         $userDetails = UserDetail::where('userID', auth()->user()->userID)->first();
 
         if (!$userDetails) {
             return redirect()->back()->withErrors(['message' => 'User details not found.']);
         }
 
-        // Retrieve the subsection and recommender ID
+        // Retrieve subsection from user details
         $subsection = $userDetails->subsection;
+        Log::info('Subsection for user: ' . $subsection);
+
+        // Fetch the recommender ID for the subsection
         $recommenderId = $this->getRecommenderId($subsection);
+
+        // Check if the recommender was found
+        if (!$recommenderId) {
+            return redirect()->back()->withErrors(['message' => 'No recommender found for this subsection.']);
+        }
+
+        // Get employee ID from user details
         $employeeId = $userDetails->EmployeeId;
 
-        // Get the current year and generate work order ID
+        // Generate work order ID
         $year = date('Y');
         $workType = strtoupper($request->work_type);
+
+        // Get the latest work order for this work type and year
         $latestWorkOrder = WorkOrder::whereYear('created_at', $year)
             ->where('work_type', $workType)
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
             ->first();
 
-        // Determine the increment number
-        $incrementNumber = $latestWorkOrder ? (int) explode('/', $latestWorkOrder->id)[2] + 1 : 1;
+        // Extract the increment number if a previous record exists
+        $incrementNumber = $latestWorkOrder
+            ? ((int)explode('/', $latestWorkOrder->id)[3] + 1)
+            : 1;
+
+        // Format the increment number
         $incrementFormatted = str_pad($incrementNumber, 3, '0', STR_PAD_LEFT);
+
+        // Construct the new work order ID
         $id = "WMD/{$workType}/{$year}/{$incrementFormatted}";
 
-        // Create the work order
+        // Log data for debugging
+        Log::info('Creating work order: ', [
+            'id' => $id,
+            'work_type' => $request->work_type,
+            'priority' => $request->priority,
+            'complain' => $request->complain,
+            'EmployeeId' => $employeeId,
+            'recommender_id' => $recommenderId
+        ]);
+
+        // Create the new work order
         WorkOrder::create([
             'id' => $id,
             'work_type' => $request->work_type,
@@ -91,9 +127,17 @@ class WorkOrderController extends Controller
 
     private function getRecommenderId($subsection)
     {
-        // Fetch the recommender based on the subsection and role
-        return User::whereHas('userDetails', function ($query) use ($subsection) {
-            $query->where('subsection', $subsection);
-        })->where('role', 'Recommender')->value('userID');
+
+        // Fetch the recommender ID from the subsection table
+        $recommender = Subsection::where('name', $subsection)
+            ->whereNotNull('recommender_id')
+            ->first();
+
+        if (!$recommender) {
+
+            return null;
+        }
+
+        return $recommender->recommender_id; // Return the recommender ID
     }
 }

@@ -22,13 +22,16 @@ class UserDetail extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $primaryKey = 'userID';
-
     protected $table = 'user_details';
+
+
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userID');
+        return $this->belongsTo(User::class, 'userID', 'userID');
     }
+
+
 
     public function workOrders()
     {
