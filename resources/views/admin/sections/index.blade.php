@@ -303,10 +303,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 5d991d620c872ad360c220f96cb1190019c16f0f
 </div>
 
     <!-- Delete Subsection Modal -->
