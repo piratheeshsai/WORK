@@ -19,7 +19,7 @@ class WorkOrderController extends Controller
     {
         $user = auth()->user(); // Get the authenticated user
 
-        // Fetch user details to get EmployeeId
+     //   Fetch user details to get EmployeeId
         $userDetails = UserDetail::where('userID', $user->userID)->first();
 
         if (!$userDetails) {

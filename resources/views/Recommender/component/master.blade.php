@@ -43,7 +43,7 @@
 
     {{-- Sidevar start --}}
 
-    @include('component.menu')
+    @include('Recommender.component.menu')
 
     {{-- sidevar end --}}
 
@@ -53,7 +53,7 @@
 
         {{-- Navbar start --}}
 
-        @include('component.navbar')
+        @include('Recommender.component.navbar')
 
         <!-- End Navbar -->
 
@@ -100,7 +100,7 @@
 
     {{-- Settings start --}}
 
-    @include('component.setting')
+    @include('Recommender.component.setting')
 
 
     {{-- End setting --}}

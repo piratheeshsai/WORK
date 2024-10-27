@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('work_type');
             $table->string('priority');
             $table->string('complain');
+            $table->string('status')->default('Pending');
+            $table->integer('progress')->default(25);
             $table->string('EmployeeId');
             $table->timestamps();
             // Foreign key relationship

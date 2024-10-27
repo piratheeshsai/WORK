@@ -1,4 +1,4 @@
-@extends('component.master')
+@extends('Recommender.component.master')
 
 @section('content')
     <div class="contents">

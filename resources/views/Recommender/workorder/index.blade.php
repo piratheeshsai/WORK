@@ -1,4 +1,10 @@
-@extends('component.master')
+
+
+@extends('Recommender.component.master')
+
+
+
+
 
 @section('content')
     <div class="container-fluid py-4">
@@ -48,10 +54,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->id }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->work_type }}</p>
                                         </td>
                                         <td>
-                                            <span class="text-xs font-weight-bold">{{ $workOrder->id }}</span>
+                                            <span class="text-xs font-weight-bold">{{ $workOrder->priority }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <div class="d-flex align-items-center justify-content-center">
@@ -66,10 +72,13 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->id }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">View</span>
+                                            <a href="{{ route('recommender.workorder.show', $workOrder->id)}}"
+                                                class=" font-weight-bold" data-toggle="tooltip" title="Edit user">
+                                                <span class="badge badge-sm bg-gradient-success">View</span>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach
