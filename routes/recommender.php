@@ -1,10 +1,9 @@
  <?php
 
-
-use App\Http\Controllers\Engineer\EngineerDashboardController;
 use App\Http\Controllers\Recommender\RecommenderController;
 use App\Http\Controllers\Recommender\RecommenderProfileController;
 use App\Http\Controllers\Recommender\RecommenderWorkOrderController;
+use App\Http\Controllers\User\WorkOrderController;
 use App\Models\Department;
 use App\Models\Subsection;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +26,20 @@ Route::get('/get-departments/{subsectionsId}', function($subsectionId) {
 });
 
 
-Route::get('workorder/{workOrder}', [RecommenderWorkOrderController::class, 'show'])->name('workorder.show');
+Route::get('workorder/{workOrder}', [RecommenderWorkOrderController::class, 'show'])
+    ->name('workorder.show')
+    ->where('workOrder', '.*');
+
+   // web.php
+   Route::post('workorder/{id}/approve', [RecommenderWorkOrderController::class, 'approve'])
+    ->name('workorder.approve')
+    ->where('id', '.*');
+
+Route::post('workorder/{id}/reject', [RecommenderWorkOrderController::class, 'reject'])
+    ->name('workorder.reject')
+    ->where('id', '.*');
+
+
 
 
  });

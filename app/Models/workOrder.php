@@ -32,4 +32,12 @@ public function recommender() {
     return $this->belongsTo(User::class, 'recommender_id', 'userID');
 }
 
+public function section()
+{
+    return $this->belongsTo(Section::class, 'section_id');
 }
+
+
+}
+
+

@@ -62,10 +62,36 @@ class RecommenderWorkOrderController extends Controller
         return view('recommender.workOrder.index', compact('workOrders'));
     }
 
-    public function show(WorkOrder $workOrder)
-    {
-        return view('Recommender.workorder.show', compact('workOrder'));
-    }
+    public function show($workOrder)
+{
+
+    $decodedId = urldecode($workOrder);
+    $workOrder = WorkOrder::findOrFail($decodedId);
+    return view('recommender.workorder.show', compact('workOrder'));
+}
+
+
+public function approve($id)
+{
+    $id = urldecode($id);
+    $workOrder = WorkOrder::findOrFail($id);
+    $workOrder->status = 'Approved';
+    $workOrder->save();
+
+    return redirect()->back()->with('success', 'Work order approved successfully.');
+}
+
+public function reject($id)
+
+{
+    $id = urldecode($id);
+    $workOrder = WorkOrder::findOrFail($id);
+    $workOrder->status = 'Rejected';
+    $workOrder->save();
+
+    return redirect()->back()->with('success', 'Work order rejected successfully.');
+}
+
 
 
 }

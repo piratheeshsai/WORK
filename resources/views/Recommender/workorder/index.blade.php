@@ -75,7 +75,7 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <a href="{{ route('recommender.workorder.show', $workOrder->id)}}"
+                                            <a href="{{ route('recommender.workorder.show', ['workOrder' => urlencode($workOrder->id)]) }}"
                                                 class=" font-weight-bold" data-toggle="tooltip" title="Edit user">
                                                 <span class="badge badge-sm bg-gradient-success">View</span>
                                             </a>
