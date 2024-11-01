@@ -43,6 +43,30 @@
                                         <span class="text-dark text-uppercase">{{ optional($workOrder)->work_type ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <strong class="text-muted">Complain:</strong>
+                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->complain ?? 'Not Updated' }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <strong class="text-muted">Priority:</strong>
+                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->priority ?? 'Not Updated' }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <strong class="text-muted">Created By:</strong>
+                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->EmployeeId ?? 'Not Updated' }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-3">
+                                        <strong class="text-muted">Date:</strong>
+                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->created_at->format('Y-m-d')?? 'Not Updated' }}</span>
+                                    </p>
+                                </div>
                                 <!-- Other fields -->
                             </div>
                         </div>

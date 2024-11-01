@@ -1,142 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    {{-- <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>Sections</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            @foreach ($sections as $section)
-                                <div class="col-md-3 mb-3">
-                                    <button class="btn btn-secondary w-100 toggle-section" data-bs-toggle="collapse"
-                                        data-bs-target="#sectionTable{{ $section->id }}" aria-expanded="false">
-                                        {{ $section->name }}
-                                    </button>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="accordion" id="sectionAccordion">
-                            @foreach ($sections as $section)
-                                <div class="accordion-item">
-                                    <div id="sectionTable{{ $section->id }}" class="accordion-collapse collapse"
-                                        aria-labelledby="heading{{ $section->id }}" data-bs-parent="#sectionAccordion">
-                                        <div class="accordion-body">
-                                            <div class="d-flex justify-content-end mb-3">
-                                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#createSubsectionModal"
-                                                    data-section-id="{{ $section->id }}">
-                                                    Add New Subsection
-                                                </button>
-                                            </div>
-
-                                            <table class="table table-bordered table-striped">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Subsection</th>
-                                                        <th>Departments</th>
-                                                        <th>Section Head</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="subsectionTable{{ $section->id }}">
-                                                    @foreach ($section->subsections as $subsection)
-                                                        <tr id="subsectionRow{{ $subsection->id }}">
-                                                            <td>{{ $subsection->name }}
-
-                                                                <div>
-                                                                    @if ($subsection)
-                                                                        <form action="{{ route('admin.delete', ['type' => 'subsection', 'id' => $subsection->id]) }}" method="POST" style="display:inline;" class="delete-form">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button class="btn btn-danger btn-sm delete-btn" style="display:none;">Delete</button>
-                                                                        </form>
-                                                                    @else
-                                                                        <p>Department not found</p>
-                                                                    @endif
-
-                                                                    <button class="btn btn-secondary createDepartmentBtn" data-bs-toggle="modal" data-bs-target="#createDepartmentModal" data-subsection-id="{{ $subsection->id }}" style="display:none;">
-                                                                        Add Department
-                                                                    </button>
-
-                                                                    <button class="btn btn-link text-secondary mb-0 toggle-buttons" aria-haspopup="true" aria-expanded="false">
-                                                                        <i class="fa fa-ellipsis-v text-xs"></i>
-                                                                    </button>
-                                                                </div>
-                                                            <td>
-                                                                <ul class="list-unstyled">
-                                                                    @foreach ($subsection->departments as $department)
-                                                                        <li id="departmentRow{{ $department->id }}"
-                                                                            class="d-flex justify-content-between align-items-center">
-                                                                            {{ $department->name }}
-                                                                            <div>
-                                                                                <button
-                                                                                    class="btn btn-sm btn-primary editDepartmentBtn"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#editDepartmentModal"
-                                                                                    data-department-id="{{ $department->id }}"
-                                                                                    data-department-name="{{ $department->name }}">
-                                                                                    Edit
-
-
-                                                                                </button>
-
-
-                                                                                @if ($department)
-                                                                                    <form <form
-                                                                                        action="{{ route('admin.delete', ['type' => 'department', 'id' => $department->id]) }}"
-                                                                                        method="POST"
-                                                                                        style="display:inline;"
-                                                                                        class="delete-form">
-                                                                                        @csrf
-                                                                                        @method('DELETE')
-                                                                                        <button
-                                                                                            class="btn btn-danger btn-sm delete-btn">Delete</button>
-                                                                                    </form>
-                                                                                @else
-                                                                                    <p>Department not found</p>
-                                                                                @endif
-
-                                                                                <button
-                                                                                    class="btn btn-link text-secondary mb-0"
-                                                                                    aria-haspopup="true"
-                                                                                    aria-expanded="false">
-                                                                                    <i class="fa fa-ellipsis-v text-xs"></i>
-                                                                                </button>
-
-                                                                            </div>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            </td>
-                                                            <td>{{ $subsection->section_head }}
-                                                                <button class="btn btn-primary editSectionHeadBtn"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#editSectionHeadModal"
-                                                                    data-subsection-id="{{ $subsection->id }}"
-                                                                    data-section-head="{{ $subsection->section_head }}">
-                                                                    Edit Section Head
-                                                                </button>
-                                                            </td>
-
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <style>
         /* Ensure text breaks neatly and prevents overflow */
         /* Make content and buttons wrap neatly */
@@ -219,6 +83,14 @@
                                                                 </button>
                                                                 <ul class="dropdown-menu">
                                                                     <li>
+                                                                        <button class="dropdown-item"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#createDepartmentModal"
+                                                                            data-subsection-id="{{ $subsection->id }}">
+                                                                            Create Department
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
                                                                         <button class="dropdown-item deleteSubsectionBtn"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#deleteSubsectionModal"
@@ -250,14 +122,6 @@
                                                                                     data-department-id="{{ $department->id }}"
                                                                                     data-department-name="{{ $department->name }}">
                                                                                     Edit Department
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="dropdown-item"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#createDepartmentModal"
-                                                                                    data-subsection-id="{{ $subsection->id }}">
-                                                                                    Create Department
                                                                                 </button>
                                                                             </li>
                                                                             <li>
