@@ -1,5 +1,5 @@
 
-@extends('component.master')
+@extends('civil.component.master')
 
 @section('content')
 

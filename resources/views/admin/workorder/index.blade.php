@@ -66,14 +66,13 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-
                                             <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p>
-
                                         </td>
-                                        <td>
-                                            <button class="btn btn-link text-secondary mb-0">
-                                                <i class="fa fa-ellipsis-v text-xs"></i>
-                                            </button>
+                                        <td class="align-middle text-center text-sm">
+                                            <a href="{{ route('recommender.workorder.show', ['workOrder' => urlencode($workOrder->id)]) }}"
+                                                class=" font-weight-bold" data-toggle="tooltip" title="Edit user">
+                                                <span class="badge badge-sm bg-gradient-success">View</span>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach
