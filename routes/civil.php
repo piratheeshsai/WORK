@@ -21,4 +21,13 @@ Route::get('/get-departments/{subsectionsId}', function($subsectionId) {
 });
 
 Route::get('workorder', [CivilWorkOrderController::class, 'index'])->name('work.index');
+
+Route::get('workorder/{workOrder}', [CivilWorkOrderController::class, 'show'])
+    ->name('workorder.show')
+    ->where('workOrder', '.*');
+
+
+    Route::delete('workorder/{workOrder}', [CivilWorkOrderController::class, 'destroy'])->name('workorder.destroy')
+    ->where('workOrder', '.*');
+
 });

@@ -15,4 +15,12 @@ class CivilWorkOrderController extends Controller
                                ->paginate(10);
         return view('civil.workOrder.index', compact('workOrders'));
     }
+
+    public function show($workOrder)
+{
+
+    $decodedId = urldecode($workOrder);
+    $workOrder = WorkOrder::findOrFail($decodedId);
+    return view('civil.workorder.show', compact('workOrder'));
+}
 }

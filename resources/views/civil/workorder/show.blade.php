@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('civil.component.master')
 
 @section('content')
     <div class="container-fluid py-4 mt-5">
@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Complain:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->complain ?? 'Not Updated' }}</span>
+                                        <span class="text-dark text-uppercase">{{ strip_tags($workOrder->complain)}}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
