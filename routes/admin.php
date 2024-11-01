@@ -59,5 +59,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('subsections/store', [SectionController::class, 'storeSubsection'])->name('subsections.store');
 
     Route::get('workorder', [AdminWorkOrderController::class, 'index'])->name('workorder.index');
+    Route::get('workorder/{workOrder}', [AdminWorkOrderController::class, 'show'])
+    ->name('workorder.show')
+    ->where('workOrder', '.*');
 
+    Route::delete('workorder/{workOrder}', [AdminWorkOrderController::class, 'destroy'])->name('workorder.destroy')->where('workOrder', '.*');
 });
