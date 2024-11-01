@@ -63,5 +63,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     ->name('workorder.show')
     ->where('workOrder', '.*');
 
-    Route::delete('workorder/{workOrder}', [AdminWorkOrderController::class, 'destroy'])->name('workorder.destroy')->where('workOrder', '.*');
+
+    Route::delete('workorder/{workOrder}', [AdminWorkOrderController::class, 'destroy'])->name('workorder.destroy')
+    ->where('workOrder', '.*');
+
+
 });

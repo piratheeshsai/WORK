@@ -14,6 +14,7 @@
                                 <!-- Reject Button -->
                                 <form action="{{ route('admin.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
                                     @csrf
+                                    @method('DELETE')
                                     <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Delete</button>
                                 </form>
                             </div>
@@ -41,7 +42,7 @@
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Complain:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->complain ?? 'Not Updated' }}</span>
+                                        <span class="text-dark text-uppercase">{{ strip_tags($workOrder->complain, ) }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
