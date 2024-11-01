@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminWorkOrderController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -57,5 +58,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::post('subsections/store', [SectionController::class, 'storeSubsection'])->name('subsections.store');
 
+    Route::get('workorder', [AdminWorkOrderController::class, 'index'])->name('workorder.index');
 
 });
