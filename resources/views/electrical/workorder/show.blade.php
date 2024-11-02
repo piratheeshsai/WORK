@@ -1,4 +1,4 @@
-@extends('civil.component.master')
+@extends('electrical.component.master')
 
 @section('content')
     <div class="container-fluid py-4 mt-5">
@@ -10,11 +10,10 @@
                             <h3 class="mb-0">Work Order Details</h3>
                             <!-- Push the buttons to the right -->
                             <div class="ms-auto d-flex">
-
                                 <!-- Reject Button -->
-                                <form action="{{ route('civil.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('electrical.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
                                     @csrf
-                                    <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Delete</button>
+                                    <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Reject</button>
                                 </form>
                             </div>
                         </div>
@@ -73,6 +72,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Approve Button Confirmation
+        document.getElementById('approve-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Approve this work order?',
+                showDenyButton: true,
+                confirmButtonText: 'Yes, approve it!',
+                denyButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                } else if (result.isDenied) {
+                    Swal.fire('Action cancelled', '', 'info');
+                }
+            });
+        });
 
         // Reject Button Confirmation
         document.getElementById('reject-btn').addEventListener('click', function(event) {

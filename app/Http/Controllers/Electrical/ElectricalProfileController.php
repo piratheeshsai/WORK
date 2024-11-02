@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Civil;
+namespace App\Http\Controllers\Electrical;
 
 use App\Http\Controllers\Controller;
-use App\Models\Department;
 use App\Models\Section;
-use App\Models\Subsection;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
-class CivilProfileController extends Controller
+class ElectricalProfileController extends Controller
 {
     public function index()
     {
@@ -22,7 +20,7 @@ class CivilProfileController extends Controller
         $userDetails = UserDetail::where('userID', $user->userID)->first();
 
         // Pass both the user and sections to the view
-        return view('civil.profile.index', compact('user', 'section', 'userDetails'));
+        return view('electrical.profile.index', compact('user', 'section', 'userDetails'));
 }
 public function update(Request $request)
 {
@@ -42,6 +40,7 @@ public function update(Request $request)
         'email' => 'nullable|email|max:255',
         'PhoneNumber' => 'nullable|string|max:15',
         'EmployeeId' => 'nullable|string|max:20',
+        
     ]);
     // Update the 'users' table
     $user->update(['name' => $request->name]);
