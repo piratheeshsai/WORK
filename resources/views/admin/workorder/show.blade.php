@@ -12,7 +12,8 @@
                             <div class="ms-auto d-flex">
 
                                 <!-- Reject Button -->
-                                <form action="{{ route('admin.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('admin.workorder.destroy', urlencode($workOrder->id)) }}"
+                                    method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Delete</button>
@@ -22,10 +23,10 @@
                     </div>
 
                     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     <div class="card">
                         <div class="card-header">
@@ -36,31 +37,36 @@
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Work Type:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->work_type ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->work_type ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Complain:</strong>
-                                        <span class="text-dark text-uppercase">{{ strip_tags($workOrder->complain, ) }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ strip_tags($workOrder->complain) }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Priority:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->priority ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->priority ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Created By:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->EmployeeId ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->EmployeeId ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Date:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->created_at->format('Y-m-d')?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->created_at->format('Y-m-d') ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <!-- Other fields -->
@@ -74,7 +80,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
         // Reject Button Confirmation
         document.getElementById('reject-btn').addEventListener('click', function(event) {
             event.preventDefault();

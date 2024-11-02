@@ -76,6 +76,7 @@ public function approve($id)
     $id = urldecode($id);
     $workOrder = WorkOrder::findOrFail($id);
     $workOrder->status = 'Approved';
+    $workOrder->progress = 50;
     $workOrder->save();
 
     return redirect()->back()->with('success', 'Work order approved successfully.');
