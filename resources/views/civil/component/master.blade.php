@@ -28,7 +28,7 @@
 
     {{-- Sidevar start --}}
 
-    @include('Recommender.component.menu')
+    @include('civil.component.menu')
 
     {{-- sidevar end --}}
 
@@ -38,7 +38,7 @@
 
         {{-- Navbar start --}}
 
-        @include('Recommender.component.navbar')
+        @include('civil.component.navbar')
 
         <!-- End Navbar -->
 
@@ -85,7 +85,7 @@
 
     {{-- Settings start --}}
 
-    @include('Recommender.component.setting')
+    @include('civil.component.setting')
 
 
     {{-- End setting --}}

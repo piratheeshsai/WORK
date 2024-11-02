@@ -36,7 +36,7 @@ id="sidenav-main">
 <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link active" href="">
+            <a class="nav-link active" href="{{ route('electrical.dashboard') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -45,7 +45,7 @@ id="sidenav-main">
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('recommender.profile.index') }}">
+            <a class="nav-link " href="{{ route('electrical.profile.index') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa-solid fa-user-plus " style="color: #007bff;"></i>
@@ -54,7 +54,7 @@ id="sidenav-main">
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('recommender.work.index') }}">
+            <a class="nav-link " href="{{ route('electrical.work.index') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-credit-card text-success text-sm opacity-10"></i>

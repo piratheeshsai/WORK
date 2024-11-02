@@ -1,4 +1,4 @@
-@extends('Recommender.component.master')
+@extends('electrical.component.master')
 
 @section('content')
     <div class="container-fluid py-4 mt-5">
@@ -10,14 +10,8 @@
                             <h3 class="mb-0">Work Order Details</h3>
                             <!-- Push the buttons to the right -->
                             <div class="ms-auto d-flex">
-                                <!-- Approve Button -->
-                                <form action="{{ route('recommender.workorder.approve', urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button class="btn btn-success btn-sm me-2" id="approve-btn">Approve</button>
-                                </form>
-
                                 <!-- Reject Button -->
-                                <form action="{{ route('recommender.workorder.reject',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('electrical.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
                                     @csrf
                                     <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Reject</button>
                                 </form>

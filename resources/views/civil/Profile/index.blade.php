@@ -71,7 +71,7 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h6 class="mt-3 mb-2 text-primary mb-3">Section Details</h6>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    {{-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <label for="section" class="form-label">Section</label>
                                         <select class="form-select" id="section" name="section" required>
                                             <option value="" disabled selected>Select Section</option>
@@ -101,7 +101,7 @@
                                             <input type="text" class="form-control" id="section_head"
                                                 placeholder="Administrator" readonly>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row gutters">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

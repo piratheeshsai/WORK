@@ -3,7 +3,7 @@
 @section('content')
     <div class="contents">
         <div class="container mt-5">
-            <form action="{{ route('recommender.profile.update') }}" method="POST">
+            <form action="{{ route('civil.profile.update') }}" method="POST">
                 @csrf
 
             @method('PUT')
