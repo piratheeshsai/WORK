@@ -8,6 +8,7 @@ use App\Models\Section;
 use App\Models\Subsection;
 use App\Models\Department;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class SectionController extends Controller
 {
@@ -19,7 +20,7 @@ class SectionController extends Controller
         $subsections = Subsection::with('departments')->get();
 
         $recommenders = User::where('role', 'recommender')->get();
-        return view('admin.sections.index', compact('sections', 'subsections','recommenders'));
+        return view('admin.sections.index', compact('sections', 'subsections', 'recommenders'));
     }
 
     // Store a new subsection
@@ -39,21 +40,23 @@ class SectionController extends Controller
 
 
     // Store a new department
+
     public function storeDepartment(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'subsection_id' => 'required|exists:subsections,id',
+            'subsections_id' => 'required|exists:subsections,id',
         ]);
 
-        // Create a new department and associate it with the selected subsection
         $department = Department::create([
             'name' => $request->name,
-            'subsections_id' => $request->subsection_id, // This must match the column name in your departments table
+            'subsections_id' => $request->subsections_id,
         ]);
 
         return response()->json(['department' => $department, 'subsection_id' => $department->subsections_id]);
     }
+
+
     public function updateSubsection(Request $request)
     {
         $request->validate([
@@ -85,30 +88,13 @@ class SectionController extends Controller
 
 
 
-    // public function destroy(Department $department)
-    // {
-    //     $department->delete();
-    //     return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
-    // }
-
-    public function destroy($type, $id)
+    public function destroyDepartment($id)
     {
-        if ($type == 'department') {
-            $department = Department::find($id);
-            if ($department) {
-                $department->delete();
-                return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
-            }
-            return redirect()->back()->with('error', 'Department not found.');
-        } elseif ($type == 'subsection') {
-            $subsection = Subsection::find($id);
-            if ($subsection) {
-                $subsection->delete();
-                return redirect()->route('admin.sections.index')->with('success', 'Subsection deleted successfully.');
-            }
-            return redirect()->back()->with('error', 'Subsection not found.');
-        }
+        // Find the department by ID and delete it
+        $department = Department::findOrFail($id);
+        $department->delete();
 
-        return redirect()->back()->with('error', 'Invalid request.');
+
+        return redirect()->route('admin.sections.index')->with('success', 'User deleted successfully.');
     }
 }
