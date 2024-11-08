@@ -68,7 +68,7 @@
                                                             aria-valuemin="0" aria-valuemax="100"
                                                             style="width: {{ $workOrder->progress }}%;"
                                                             title="{{ $workOrder->status }}">
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,34 +98,3 @@
         </div>
     @endsection
 
-
-    {{-- <tbody>
-        @foreach($workOrders as $workOrder)
-            <tr>
-                <td>
-                    <div class="d-flex px-3">
-                        <div class="my-auto">
-                            <h6 class="mb-0 text-sm">{{ $workOrder->id }}</h6> <!-- Work Order Number -->
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="text-sm font-weight-bold mb-0">{{ $workOrder->work_type }}</p> <!-- Work Type -->
-                </td>
-                <td>
-                    <span class="text-xs font-weight-bold">{{ ucfirst($workOrder->priority) }}</span> <!-- Priority -->
-                </td>
-                <td class="align-middle text-center">
-                    <span class="text-xs font-weight-bold">{{ $workOrder->status }}</span> <!-- Status -->
-                </td>
-                <td class="align-middle">
-                    <p class="text-sm font-weight-bold mb-0">{{ $workOrder->created_at->format('Y-m-d') }}</p> <!-- Date -->
-                </td>
-                <td>
-                    <button class="btn btn-link text-secondary mb-0">
-                        <i class="fa fa-ellipsis-v text-xs"></i>
-                    </button>
-                </td>
-            </tr>
-        @endforeach
-    </tbody> --}}

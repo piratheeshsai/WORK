@@ -1,27 +1,58 @@
-// $(document).ready(function () {
-//     // Handle the submission of the subsection form
-//     $('#createSubsectionForm').submit(function (e) {
-//         e.preventDefault(); // Prevent the default form submission
+///delete department
 
-//         var formData = $(this).serialize(); // Serialize the form data
+$(document).ready(function() {
+    // Use class selector to handle multiple delete buttons
+    $('.delete-btn').on('click', function(event) {
+        event.preventDefault(); // Prevent form from submitting immediately
 
-//         $.ajax({
-//             url: createSubsectionUrl, // Ensure this route is correct
-//             type: 'POST',
-//             data: formData,
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             },
-//             success: function (response) {
-//                 $('#createSubsectionModal').modal('hide'); // Hide the modal
-//                 alert('Subsection added successfully!');
-//             },
-//             error: function (xhr) {
-//                 console.log(xhr.responseText); // Log the error response
-//                 alert('An error occurred while adding the subsection.');
-//             }
-//         });
-//     });
+        var form = $(this).closest('form'); // Get the specific form for this button
+
+        // Show SweetAlert confirmation
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user confirms, submit the specific form
+                form.submit();
+                Swal.fire('Deleted!', 'The department has been deleted.', 'success');
+            }
+        });
+    });
+});
+
+
+///delete the subsection
+
+$(document).on('click', '.deleteSubsectionBtn', function(event) {
+    event.preventDefault();
+    var form = $(this).closest('form');
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "This action cannot be undone!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+            Swal.fire('Deleted!', 'The subsection has been deleted.', 'success');
+        }
+    });
+});
+
+
+
 
 
 $(document).ready(function () {
@@ -63,32 +94,7 @@ $(document).ready(function () {
 
 
 
-    // Handle the submission of the department form
-    // $('#createDepartmentForm').submit(function (e) {
-    //     e.preventDefault(); // Prevent the default form submission
 
-    //     var formData = $(this).serialize(); // Serialize the form data
-
-    //     $.ajax({
-    //         url: createDepartmentUrl, // Ensure this route is correct
-    //         type: 'POST',
-    //         data: formData,
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         success: function (response) {
-    //             $('#createDepartmentModal').modal('hide'); // Hide the modal
-    //             alert('Department added successfully!');
-    //             $('#subsectionDepartments' + response.subsection_id).append(`<li>${response.department.name}</li>`);
-    //         },
-    //         error: function (xhr) {
-    //             console.log(xhr.responseText); // Log the error response
-    //             alert('An error occurred while adding the department.');
-    //         }
-    //     });
-    // });
-
-   // Set subsection_id when creating a department
 $(document).on('click', '.createDepartmentBtn', function () {
     var subsectionId = $(this).data('subsection-id');
     $('#subsection_id').val(subsectionId); // Set the subsection_id in the hidden input
@@ -129,13 +135,7 @@ $('#createDepartmentForm').submit(function (e) {
 
 
 
-    // Set subsection_id when creating a department
-    // $(document).on('click', '.createDepartmentBtn', function () {
-    //     var subsectionId = $(this).data('subsection-id');
-    //     $('#subsection_id').val(subsectionId);
-    // });
 
-    // Edit Section Head
     $('.editSectionHeadBtn').click(function () {
         var subsectionId = $(this).data('subsection-id');
         var sectionHead = $(this).data('section-head');

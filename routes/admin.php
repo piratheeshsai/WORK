@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('sections', SectionController::class);
     Route::post('subsections', [SectionController::class, 'storeSubsection'])->name('subsections.store');
     Route::put('subsections/update', [SectionController::class, 'updateSubsection'])->name('subsections.update');
-    Route::delete('subsections/{id}', [SectionController::class, 'destroySubsection'])->name('subsections.destroy');
+    Route::delete('/subsections/{id}', [SectionController::class, 'destroy'])->name('subsections.destroy');
 
     Route::post('departments/create', [SectionController::class, 'storeDepartment'])->name('departments.store');
     Route::put('departments/update', [SectionController::class, 'updateDepartment'])->name('departments.update');

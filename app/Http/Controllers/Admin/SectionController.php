@@ -95,6 +95,16 @@ class SectionController extends Controller
         $department->delete();
 
 
-        return redirect()->route('admin.sections.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.sections.index')->with('success', 'Department deleted successfully.');
     }
+
+    public function destroy($id)
+    {
+        $subsection = Subsection::findOrFail($id);
+        $subsection->delete();
+
+        return redirect()->route('admin.sections.index')->with('success', 'Subsection deleted successfully.');
+
+    }
+
 }
