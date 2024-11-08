@@ -57,10 +57,16 @@
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <span class="me-2 text-xs font-weight-bold"></span>
                                                 <div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-info" role="progressbar"
-                                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 60%;"></div>
+                                                    <div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-gradient-info" role="progressbar"
+                                                                aria-valuenow="{{ $workOrder->progress }}"
+                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                style="width: {{ $workOrder->progress }}%;"
+                                                                title="{{ $workOrder->status }}">
+                                                                
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
