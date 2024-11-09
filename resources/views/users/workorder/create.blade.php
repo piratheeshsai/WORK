@@ -81,11 +81,11 @@
                     <!-- Complaint Description -->
                     <div class="mb-2">
                         <label for="workOrderDescription" class="form-label" style="font-weight: 400;">Complain</label>
-                        {{-- <textarea class="form-control" id="workOrderDescription" name="complain" rows="3"
-                            placeholder="Enter Complain Details"></textarea> --}}
+                        <textarea class="form-control" id="workOrderDescription" name="complain" rows="3"
+                            placeholder="Enter Complain Details"></textarea>
 
-                            <textarea class="form-control" id="workOrderDescription" name="complain" rows="3"
-                             placeholder="Enter Complain Details"></textarea>
+                            {{-- <textarea class="form-control" id="workOrderDescription" name="complain" rows="3"
+                             placeholder="Enter Complain Details"></textarea> --}}
 
                     </div>
                 </fieldset>
@@ -102,19 +102,19 @@
 
 
 
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script> --}}
 
     <script>
 
-tinymce.init({
-    selector: '#workOrderDescription',
-    license_key: 'gpl',  // This will accept the open-source license terms
-    plugins: 'lists advlist autolink link image charmap preview anchor',
-    toolbar: 'undo redo | formatselect | bold italic backcolor | \
-              alignleft aligncenter alignright alignjustify | \
-              bullist numlist outdent indent | removeformat',
-});
+// tinymce.init({
+//     selector: '#workOrderDescription',
+//     license_key: 'gpl',  // This will accept the open-source license terms
+//     plugins: 'lists advlist autolink link image charmap preview anchor',
+//     toolbar: 'undo redo | formatselect | bold italic backcolor | \
+//               alignleft aligncenter alignright alignjustify | \
+//               bullist numlist outdent indent | removeformat',
+// });
         document.getElementById('workOrderType').addEventListener('change', function() {
                var otherWorkType = document.getElementById('otherWorkType');
                if (this.value === 'other') {
@@ -126,15 +126,9 @@ tinymce.init({
 
 
            // Check if any event listener has this pattern:
-    document.querySelector("form").addEventListener("submit", function (event) {
-     event.preventDefault();
+
         // Custom JavaScript logic
-     });
+
     </script>
 
 @endsection
-
-
-
-
-

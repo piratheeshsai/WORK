@@ -77,8 +77,10 @@
                                                                                     data-bs-toggle="modal"
                                                                                     data-bs-target="#createDepartmentModal"
                                                                                     data-subsection-id="{{ $subsection->id }}">
-                                                                                    <i class="fa-solid fa-file-circle-plus me-2"></i>
-                                                                                      <span class="fw-bold"> Add Department </span>
+                                                                                    <i
+                                                                                        class="fa-solid fa-file-circle-plus me-2"></i>
+                                                                                    <span class="fw-bold"> Add Department
+                                                                                    </span>
                                                                                 </button>
                                                                             </li>
                                                                             <li>
@@ -91,8 +93,10 @@
                                                                                     <button type="button"
                                                                                         class="dropdown-item deleteSubsectionBtn"
                                                                                         data-subsection-id="{{ $subsection->id }}">
-                                                                                        <i class="fa-solid fa-trash me-2"></i>
-                                                                                      <span class="fw-bold">  Delete Subsection </span>
+                                                                                        <i
+                                                                                            class="fa-solid fa-trash me-2"></i>
+                                                                                        <span class="fw-bold"> Delete
+                                                                                            Subsection </span>
                                                                                     </button>
                                                                                 </form>
 
@@ -130,9 +134,11 @@
                                                                                                 data-bs-target="#editDepartmentModal"
                                                                                                 data-department-id="{{ $department->id }}"
                                                                                                 data-department-name="{{ $department->name }}">
-                                                                                                <i class="fa-solid fa-file-pen me-2"></i>
-                                                                                               <span class="fw-bold"> Edit Department </span
-                                                                                            </button>
+                                                                                                <i
+                                                                                                    class="fa-solid fa-file-pen me-2"></i>
+                                                                                                <span class="fw-bold"> Edit
+                                                                                                    Department </span
+                                                                                                    </button>
                                                                                         </li>
                                                                                         <li>
                                                                                             <form
@@ -144,8 +150,11 @@
                                                                                                 <button type="button"
                                                                                                     class="dropdown-item delete-btn"
                                                                                                     data-department-id="{{ $department->id }}">
-                                                                                                    <i class="fa-solid fa-trash me-2"></i>
-                                                                                      <span class="fw-bold">  Delete Department </span>
+                                                                                                    <i
+                                                                                                        class="fa-solid fa-trash me-2"></i>
+                                                                                                    <span class="fw-bold">
+                                                                                                        Delete Department
+                                                                                                    </span>
 
                                                                                                 </button>
                                                                                             </form>

@@ -51,67 +51,72 @@ class WorkOrderController extends Controller
 
 
     public function store(Request $request)
-    {
-        // Validate the request data
-        $request->validate([
-            'work_type' => 'required|string|max:255',
-            'priority' => 'required|string|in:normal,urgent',
-            'complain' => 'required|string|max:1000',
-        ]);
+{
+    // Validate the request data
+    $request->validate([
+        'work_type' => 'required|string|max:255',
+        'priority' => 'required|string|in:normal,urgent',
+        'complain' => 'required|string|max:1000',
+    ]);
 
-        // Get authenticated user details
-        $userDetails = UserDetail::where('userID', auth()->user()->userID)->first();
+    // Get authenticated user details
+    $userDetails = UserDetail::where('userID', auth()->user()->userID)->first();
 
-        if (!$userDetails) {
-            return redirect()->back()->withErrors(['message' => 'User details not found.']);
-        }
+    if (!$userDetails) {
+        return redirect()->back()->withErrors(['message' => 'User details not found.']);
+    }
 
-        // Retrieve subsection from user details
-        $subsection = $userDetails->subsection;
-        Log::info('Subsection for user: ' . $subsection);
+    // Retrieve subsection from user details
+    $subsection = $userDetails->subsection;
 
-        // Fetch the recommender ID for the subsection
-        $recommenderId = $this->getRecommenderId($subsection);
+    // Check if the subsection exists
+    if (!$subsection) {
+        return redirect()->back()->withErrors(['message' => 'Subsection not found.']);
+    }
 
-        // Check if the recommender was found
-        if (!$recommenderId) {
-            return redirect()->back()->withErrors(['message' => 'No recommender found for this subsection.']);
-        }
+    // Fetch the recommender ID for the subsection
+    $recommenderId = $this->getRecommenderId($subsection);
 
-        // Get employee ID from user details
-        $employeeId = $userDetails->EmployeeId;
+    // Check if the recommender was found
+    if (!$recommenderId) {
+        return redirect()->back()->withErrors(['message' => 'No recommender found for this subsection.']);
+    }
 
-        // Generate work order ID
-        $year = date('Y');
-        $workType = strtoupper($request->work_type);
+    // Get employee ID from user details
+    $employeeId = $userDetails->EmployeeId;
 
-        // Get the latest work order for this work type and year
-        $latestWorkOrder = WorkOrder::whereYear('created_at', $year)
-            ->where('work_type', $workType)
-            ->orderBy('created_at', 'desc')
-            ->first();
+    // Generate work order ID
+    $year = date('Y');
+    $workType = strtoupper($request->work_type);
 
-        // Extract the increment number if a previous record exists
-        $incrementNumber = $latestWorkOrder
-            ? ((int)explode('/', $latestWorkOrder->id)[3] + 1)
-            : 1;
+    // Get the latest work order for this work type and year
+    $latestWorkOrder = WorkOrder::whereYear('created_at', $year)
+        ->where('work_type', $workType)
+        ->orderBy('created_at', 'desc')
+        ->first();
 
-        // Format the increment number
-        $incrementFormatted = str_pad($incrementNumber, 3, '0', STR_PAD_LEFT);
+    // Extract the increment number if a previous record exists
+    $incrementNumber = $latestWorkOrder
+        ? ((int)explode('/', $latestWorkOrder->id)[3] + 1)
+        : 1;
 
-        // Construct the new work order ID
-        $id = "WMD/{$workType}/{$year}/{$incrementFormatted}";
+    // Format the increment number
+    $incrementFormatted = str_pad($incrementNumber, 3, '0', STR_PAD_LEFT);
 
-        // Log data for debugging
-        Log::info('Creating work order: ', [
-            'id' => $id,
-            'work_type' => $request->work_type,
-            'priority' => $request->priority,
-            'complain' => $request->complain,
-            'EmployeeId' => $employeeId,
-            'recommender_id' => $recommenderId
-        ]);
+    // Construct the new work order ID
+    $id = "WMD/{$workType}/{$year}/{$incrementFormatted}";
 
+    // Log data for debugging
+    Log::info('Creating work order: ', [
+        'id' => $id,
+        'work_type' => $request->work_type,
+        'priority' => $request->priority,
+        'complain' => $request->complain,
+        'EmployeeId' => $employeeId,
+        'recommender_id' => $recommenderId
+    ]);
+
+    try {
         // Create the new work order
         WorkOrder::create([
             'id' => $id,
@@ -123,21 +128,32 @@ class WorkOrderController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Work order created successfully!');
+    } catch (\Exception $e) {
+        Log::error('Work order creation failed', [
+            'error' => $e->getMessage(),
+            'work_type' => $request->work_type,
+            'priority' => $request->priority,
+            'complain' => $request->complain,
+        ]);
+        return redirect()->back()->withErrors(['message' => 'An error occurred while creating the work order.']);
+    }
+}
+
+private function getRecommenderId($subsection)
+{
+    // Fetch the recommender ID from the subsection table
+    $recommender = Subsection::where('name', $subsection)
+        ->whereNotNull('recommender_id')
+        ->first();
+
+    // Log the result for debugging
+    Log::info('Recommender for subsection: ' . $subsection, ['recommender' => $recommender]);
+
+    if (!$recommender) {
+        return null;
     }
 
-    private function getRecommenderId($subsection)
-    {
+    return $recommender->recommender_id; // Return the recommender ID
+}
 
-        // Fetch the recommender ID from the subsection table
-        $recommender = Subsection::where('name', $subsection)
-            ->whereNotNull('recommender_id')
-            ->first();
-
-        if (!$recommender) {
-
-            return null;
-        }
-
-        return $recommender->recommender_id; // Return the recommender ID
-    }
 }
