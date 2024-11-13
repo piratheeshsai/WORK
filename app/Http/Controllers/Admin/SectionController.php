@@ -28,7 +28,6 @@ class SectionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'section_head' => 'required|string|max:255',
             'section_id' => 'required|exists:section,id',
             'recommender_id' => 'nullable|exists:users,userID', // Make sure the table name is correct
         ]);
@@ -61,7 +60,7 @@ class SectionController extends Controller
     {
         $request->validate([
             'subsection_id' => 'required|exists:subsections,id',
-            'section_head' => 'required|string|max:255',
+
         ]);
 
         $subsection = Subsection::findOrFail($request->subsection_id);
@@ -106,5 +105,101 @@ class SectionController extends Controller
         return redirect()->route('admin.sections.index')->with('success', 'Subsection deleted successfully.');
 
     }
+
+
+    // In SubsectionController.php
+
+  // In SectionController.php
+//   public function updateRecommender(Request $request, $id)
+// {
+//     // Retrieve the subsection by ID
+//     $subsection = Subsection::findOrFail($id);
+
+//     // Log data to check if values are correct
+//     Log::info('Subsection found:', ['subsection' => $subsection]);
+//     Log::info('Recommender ID:', ['recommender_id' => $request->input('recommender_id')]);
+
+//     // Validate the recommender ID
+//     $request->validate([
+//         'recommender_id' => 'required|exists:users,userID', // Check if recommender exists in the users table
+//     ]);
+
+//     // Update the recommender ID for the subsection
+//     $subsection->recommender_id = $request->input('recommender_id');
+//     $subsection->save();
+
+//     // Log after saving to confirm
+//     Log::info('Subsection updated:', ['subsection' => $subsection]);
+
+//     // Get the name of the newly assigned recommender for the response
+//     $recommenderName = $subsection->recommender->name;
+
+//     // Return the response with the updated recommender name and subsection_id
+//     return response()->json([
+//         'message' => 'Recommender updated successfully!',
+//         'recommender_name' => $recommenderName, // Send the recommender's name back
+//         'subsection_id' => $subsection->id, // Send the subsection_id back
+//     ]);
+// }
+
+public function updateRecommender(Request $request)
+{
+    // Validate the input data
+    $request->validate([
+        'recommender_id' => 'required|exists:users,userID',  // Ensure recommender exists
+    ]);
+
+    // Retrieve the subsection by ID
+    $subsection = Subsection::findOrFail($request->subsection_id);
+
+    // Update the recommender ID for the subsection
+    $subsection->recommender_id = $request->recommender_id;
+    $subsection->save();
+
+    // Return a response with the updated data
+    return response()->json([
+        'message' => 'Recommender updated successfully!',
+        'recommender_name' => $subsection->recommender->name,  // Send the recommender name
+        'subsection_id' => $subsection->id, // Return the subsection ID
+    ]);
+}
+
+
+
+
+
+
+
+
+
+
+
+// public function updateRecommender(Request $request)
+// {
+//     // Validate input
+//     $validated = $request->validate([
+//         'subsection_id' => 'required|exists:subsections,id',
+//         'recommender_id' => 'nullable|exists:recommenders,id', // If recommender_id is optional
+//     ]);
+
+//     // Find the subsection and update the recommender ID
+//     $subsection = Subsection::findOrFail($request->subsection_id);
+//     $subsection->recommender_id = $request->recommender_id;
+//     $subsection->save();
+
+//     // Return the updated data as a response
+//     return response()->json([
+//         'subsection_id' => $subsection->id,
+//         'recommender_name' => $subsection->recommender ? $subsection->recommender->name : 'Not assigned'
+//     ]);
+// }
+
+
+
+
+
+
+
+
 
 }

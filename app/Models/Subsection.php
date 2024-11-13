@@ -11,7 +11,7 @@ class Subsection extends Model
 
     protected $table = 'subsections'; // Correct table name
      // Define the fillable columns
-    protected $fillable = ['name', 'section_head', 'section_id', 'recommender_id'];
+    protected $fillable = ['name','section_id', 'recommender_id'];
 
     // Relationship to Section
     public function section()

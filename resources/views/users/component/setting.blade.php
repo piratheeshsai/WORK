@@ -74,15 +74,15 @@
                 <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard"
                     data-icon="octicon-star" data-size="large" data-show-count="true"
                     aria-label="Star creativetimofficial/argon-dashboard on GitHub">More</a>
-                <h6 class="mt-3">Thank you for sharing!</h6>
-                <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard"
+                {{-- <h6 class="mt-3">Thank you for sharing!</h6> --}}
+                {{-- <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard"
                     class="btn btn-dark mb-0 me-2" target="_blank">
                     <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard"
                     class="btn btn-dark mb-0 me-2" target="_blank">
                     <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>

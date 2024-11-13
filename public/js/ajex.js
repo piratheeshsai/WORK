@@ -136,36 +136,10 @@ $('#createDepartmentForm').submit(function (e) {
 
 
 
-    $('.editSectionHeadBtn').click(function () {
-        var subsectionId = $(this).data('subsection-id');
-        var sectionHead = $(this).data('section-head');
-        $('#edit_subsection_id').val(subsectionId);
-        $('#section_head').val(sectionHead);
-    });
 
-    $('#editSectionHeadForm').submit(function (e) {
-        e.preventDefault();
-        var subsectionId = $('#edit_subsection_id').val();
-        var sectionHead = $('#section_head').val();
 
-        $.ajax({
-            url: editSectionHeadUrl, // Update with correct route
-            type: 'PUT',
-            data: {
-                subsection_id: subsectionId,
-                section_head: sectionHead,
-                _token: csrfToken
-            },
-            success: function (response) {
-                alert('Section head updated successfully!');
-                location.reload(); // Reload the page to see the changes
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-                alert('An error occurred while updating the section head.');
-            }
-        });
-    });
+
+
 
     // Edit Department
     $('.editDepartmentBtn').click(function () {
@@ -198,4 +172,7 @@ $('#createDepartmentForm').submit(function (e) {
             }
         });
     });
+   // Define the URL for the update recommender route
 
+
+// When the edit recommender button is clicked, set the subsection_id and recommender_id in the modal form

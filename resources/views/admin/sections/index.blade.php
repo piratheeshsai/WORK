@@ -173,16 +173,16 @@
                                                 <div class="d-flex px-3 align-items-center">
                                                     <div class="my-auto">
 
-                                                        <span>{{ $subsection->section_head }}</span>
+                                                         <span>{{ $subsection->recommender ? $subsection->recommender->name : 'Not assigned' }}</span>
                                                     </div>
                                                     <!-- Button aligned to the right -->
-                                                    <button
-                                                        class="btn btn-link p-0 mb-0 ms-auto text-primary editSectionHeadBtn"
-                                                        data-bs-toggle="modal" data-bs-target="#editSectionHeadModal"
-                                                        data-subsection-id="{{ $subsection->id }}"
-                                                        data-section-head="{{ $subsection->section_head }}">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
+
+                                                <button class="btn btn-link p-0 mb-0 ms-auto text-primary editRecommenderBtn"
+    data-bs-toggle="modal" data-bs-target="#editRecommenderModal"
+    data-subsection-id="{{ $subsection->id }}"
+    data-recommender-id="{{ $subsection->recommender ? $subsection->recommender->id : '' }}">
+<i class="fa-solid fa-pen-to-square"></i>
+</button>
                                                 </div>
                                             </td>
 
@@ -228,29 +228,6 @@
         </div>
     </div>
 
-    <!-- Edit Section Head Modal -->
-    <div class="modal fade" id="editSectionHeadModal" tabindex="-1" aria-labelledby="editSectionHeadLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editSectionHeadLabel">Edit Section Head</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editSectionHeadForm">
-                        @csrf
-                        <input type="hidden" id="edit_subsection_id">
-                        <div class="mb-3">
-                            <label for="section_head" class="form-label">Section Head</label>
-                            <input type="text" class="form-control" id="section_head">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Edit Department Modal -->
     <div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentLabel"
@@ -295,10 +272,7 @@
                             <label for="subsectionName" class="form-label">Subsection Name</label>
                             <input type="text" name="name" class="form-control" id="subsectionName" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="sectionHead" class="form-label">Section Head</label>
-                            <input type="text" name="section_head" class="form-control" id="sectionHead" required>
-                        </div>
+
                         <div class="mb-3">
                             <label for="section_id" class="form-label">Select Section</label>
                             <select name="section_id" class="form-select" id="section_id" required>
@@ -307,8 +281,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                         <div class="mb-3">
                             <label for="recommender_id" class="form-label">Recommender</label>
                             <select name="recommender_id" id="recommender_id" class="form-select">
@@ -352,6 +324,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editRecommenderModal" tabindex="-1" aria-labelledby="editRecommenderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editRecommenderModalLabel">Edit Recommender</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Recommender Modal -->
+                    <form id="editRecommenderForm">
+                        <input type="hidden" name="subsection_id" id="subsection_id">
+                        <select name="recommender_id" id="recommender_id">
+                            @foreach($recommenders as $recommender)
+                                <option value="{{ $recommender->userID }}">{{ $recommender->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit">Update Recommender</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
 
@@ -359,7 +356,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    <script>
+
+<script>
+
+
+
+
+
+
         $(document).ready(function() {
             $('.toggle-buttons').on('click', function() {
                 // Toggle visibility of the delete and add department buttons

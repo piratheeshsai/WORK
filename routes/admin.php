@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -17,6 +16,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 
     // Section management routes
+    // Route::put('subsection/{id}/update-recommender', [SectionController::class, 'updateRecommender'])
+    //     ->name('subsection.updateRecommender'); // Removed "admin." here
+
+
+    Route::post('sections/update-recommender', [SectionController::class, 'updateRecommender'])->name('admin.sections.updateRecommender');
+
     Route::resource('sections', SectionController::class);
     Route::post('subsections', [SectionController::class, 'storeSubsection'])->name('subsections.store');
     Route::put('subsections/update', [SectionController::class, 'updateSubsection'])->name('subsections.update');

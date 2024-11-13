@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('subsections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('section_head');
             $table->foreignId('section_id')->constrained('section')->onDelete('cascade');
             $table->string('recommender_id')->nullable();
             $table->foreign('recommender_id')->references('userID')->on('users')->onDelete('set null');

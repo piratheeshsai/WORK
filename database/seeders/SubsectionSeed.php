@@ -15,17 +15,17 @@ class SubsectionSeed extends Seeder
 {
     DB::table('subsections')->insert([
         // Faculties
-        ['name' => 'Mechanical Engineering','section_head' =>'abc', 'section_id' => 1],
-        ['name' => 'Electrical Engineering','section_head' =>'swe', 'section_id' => 1],
-        ['name' => 'Civil Engineering', 'section_head' =>'hju','section_id' => 1],
+        ['name' => 'Mechanical Engineering', 'section_id' => 1],
+        ['name' => 'Electrical Engineering', 'section_id' => 1],
+        ['name' => 'Civil Engineering','section_id' => 1],
         // Administration
-        ['name' => 'Finance Department','section_head' =>'abc', 'section_id' => 2],
-        ['name' => 'Human Resources', 'section_head' =>'fgh','section_id' => 2],
-        ['name' => 'Maintenance', 'section_head' =>'fgh','section_id' => 2],
+        ['name' => 'Finance Department', 'section_id' => 2],
+        ['name' => 'Human Resources','section_id' => 2],
+        ['name' => 'Maintenance', 'section_id' => 2],
 
         // Centers
-        ['name' => 'Research Center','section_head' =>'gg', 'section_id' => 3],
-        ['name' => 'Library Services', 'section_head' =>'ghh','section_id' => 3],
+        ['name' => 'Research Center', 'section_id' => 3],
+        ['name' => 'Library Services','section_id' => 3],
     ]);
 }
 
