@@ -176,3 +176,5 @@ $('#createDepartmentForm').submit(function (e) {
 
 
 // When the edit recommender button is clicked, set the subsection_id and recommender_id in the modal form
+// Open the Edit Recommender modal and populate it with data
+

@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
 <link rel="stylesheet" href="{{ asset('css/responsives.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 @section('content')
     <div class="container-fluid py-4">
@@ -168,21 +170,29 @@
                                             </td>
 
                                             <!-- Section Head Column -->
+                                            <!-- Subsection Table Row -->
                                             <td>
-
                                                 <div class="d-flex px-3 align-items-center">
                                                     <div class="my-auto">
-
-                                                         <span>{{ $subsection->recommender ? $subsection->recommender->name : 'Not assigned' }}</span>
+                                                        <span>{{ $subsection->recommender ? $subsection->recommender->name : 'Not assigned' }}</span>
                                                     </div>
-                                                    <!-- Button aligned to the right -->
 
-                                                <button class="btn btn-link p-0 mb-0 ms-auto text-primary editRecommenderBtn"
-    data-bs-toggle="modal" data-bs-target="#editRecommenderModal"
-    data-subsection-id="{{ $subsection->id }}"
-    data-recommender-id="{{ $subsection->recommender ? $subsection->recommender->id : '' }}">
-<i class="fa-solid fa-pen-to-square"></i>
-</button>
+                                                    <button class="btn btn-link p-0 mb-0 ms-auto text-primary editRecommenderBtn"
+                                                    data-bs-toggle="modal" data-bs-target="#editRecommenderModal"
+                                                    data-subsection-id="{{ $subsection->id }}"
+                                                    data-recommender-id="{{ $subsection->recommender ? $subsection->recommender->userID : '' }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+
+
+
+
+
+
+
+
+
+
                                                 </div>
                                             </td>
 
@@ -308,44 +318,57 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createDepartmentForm">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="departmentName" class="form-label">Department Name</label>
-                            <input type="hidden" name="subsections_id" value="">
-                            <input type="text" name="name" placeholder="Department Name" required>
-                        </div>
-                        <!-- Hidden input for subsection_id -->
-
-                        <button type="submit" class="btn btn-primary">Add Department</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="editRecommenderModal" tabindex="-1" aria-labelledby="editRecommenderModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editRecommenderModalLabel">Edit Recommender</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Edit Recommender Modal -->
-                    <form id="editRecommenderForm">
-                        <input type="hidden" name="subsection_id" id="subsection_id">
-                        <select name="recommender_id" id="recommender_id">
-                            @foreach($recommenders as $recommender)
+                    <div id="editRecommenderForm">
+                        <input type="hidden" name="subsection_id" id="edit_subsection_id">
+                        <select name="recommender_id" id="recommender_id" class="form-select">
+                            @foreach ($recommenders as $recommender)
                                 <option value="{{ $recommender->userID }}">{{ $recommender->name }}</option>
                             @endforeach
                         </select>
-                        <button type="submit">Update Recommender</button>
-                    </form>
+                        <button type="button" class="btn btn-primary mt-3" id="submitRecommender">Update
+                            Recommender</button>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
     </div>
+
+   <!-- Modal for editing the recommender -->
+  <!-- Edit Recommender Modal -->
+<div class="modal fade" id="editRecommenderModal" tabindex="-1" aria-labelledby="editRecommenderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRecommenderModalLabel">Edit Recommender</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Edit Recommender Form -->
+                <form id="editRecommenderForm">
+                    <input type="hidden" name="subsection_id" id="subsection_id">
+                    <select name="recommender_id" id="recommender_id">
+                        @foreach($recommenders as $recommender)
+                            <option value="{{ $recommender->userID }}"
+                                {{ $recommender->userID == $subsection->recommender->userID ? 'selected' : '' }}>
+                                {{ $recommender->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit">Update Recommender</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
@@ -357,7 +380,59 @@
 
 
 
-<script>
+    <script>
+  // Handle the "Edit Recommender" button click
+// When the Edit Recommender Modal opens
+$('#editRecommenderModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var subsectionId = button.data('subsection-id');  // Get subsection ID
+    var recommenderId = button.data('recommender-id');  // Get recommender ID
+
+    // Log to verify the values
+    console.log('Subsection ID:', subsectionId);
+    console.log('Recommender ID:', recommenderId);
+
+    // Set the hidden input with the subsection ID
+    $('#subsection_id').val(subsectionId);
+
+    // Set the recommender dropdown to the current recommender if any
+    $('#recommender_id').val(recommenderId);
+});
+
+
+
+$('#editRecommenderForm').submit(function (e) {
+    e.preventDefault();
+
+    var subsectionId = $('#subsection_id').val();
+    var recommenderId = $('#recommender_id').val();
+
+    console.log('Subsection ID:', subsectionId);  // Log the value being sent
+    console.log('Recommender ID:', recommenderId); // Log the value being sent
+
+    $.ajax({
+        url: '{{ route('admin.sections.updateRecommender') }}',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            subsection_id: subsectionId,
+            recommender_id: recommenderId
+        },
+        success: function (response) {
+            console.log(response);  // Check the response from the server
+            $('#editRecommenderModal').modal('hide');
+            alert('Recommender updated successfully!');
+        },
+        error: function (xhr) {
+            console.log(xhr.responseText);
+            alert('An error occurred while updating the recommender.');
+        }
+    });
+});
+
+
+
+
 
 
 
@@ -401,6 +476,7 @@
     var createDepartmentUrl = "{{ route('admin.departments.store') }}";
     var editSectionHeadUrl = "{{ route('admin.subsections.update') }}";
     var editDepartmentUrl = "{{ route('admin.departments.update') }}";
+
     var csrfToken = '{{ csrf_token() }}';
     var storeSubsectionUrl = "{{ route('admin.subsections.store') }}";
 </script>

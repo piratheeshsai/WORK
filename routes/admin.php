@@ -20,7 +20,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     //     ->name('subsection.updateRecommender'); // Removed "admin." here
 
 
-    Route::post('sections/update-recommender', [SectionController::class, 'updateRecommender'])->name('admin.sections.updateRecommender');
+   // Define the route in your web.php
+  // This is the route that should handle PATCH requests for updating a recommender
+  Route::post('sections/update-recommender', [SectionController::class, 'updateRecommender'])->name('sections.updateRecommender');
+
+
+
+
+
+
+
+
+
+
 
     Route::resource('sections', SectionController::class);
     Route::post('subsections', [SectionController::class, 'storeSubsection'])->name('subsections.store');
