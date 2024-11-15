@@ -60,7 +60,6 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
- * @property string $section_head
  * @property int $section_id
  * @property string|null $recommender_id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -76,7 +75,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereRecommenderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereSectionHead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subsection whereUpdatedAt($value)
  */

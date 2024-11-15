@@ -28,7 +28,7 @@ $(document).ready(function() {
 });
 
 
-///delete the subsection
+//delete the subsection
 
 $(document).on('click', '.deleteSubsectionBtn', function(event) {
     event.preventDefault();
@@ -175,6 +175,62 @@ $('#createDepartmentForm').submit(function (e) {
    // Define the URL for the update recommender route
 
 
-// When the edit recommender button is clicked, set the subsection_id and recommender_id in the modal form
-// Open the Edit Recommender modal and populate it with data
+   $('.editRecommenderBtn').on('click', function () {
+    const subsectionId = $(this).data('subsection-id');
+    const recommenderId = $(this).data('recommender-id');
 
+    // Log values to make sure they are correct
+    console.log("Subsection ID: ", subsectionId);
+    console.log("Recommender ID: ", recommenderId);
+
+    $('#subsection_id').val(subsectionId);  // Correctly set subsection_id
+    $('#recommender_id').val(recommenderId);
+});
+
+
+
+
+// Handle form submission
+$('#submitRecommenderForm').on('click', function () {
+    var subsectionId = $('#subsection_id').val(); // This should be a valid number
+    var recommenderId = $('#recommender_id').val();
+
+    console.log('Subsection ID:', subsectionId); // Check if this is the correct value
+    console.log('Recommender ID:', recommenderId); // Check if this is the selected recommender ID
+
+    $.ajax({
+    url: editRecommendertUrl,
+    type: 'POST',
+    data: {
+        subsection_id: subsectionId,
+        recommender_id: recommenderId,
+        _token: $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(response) {
+        console.log(response);
+        if (response.success) {
+            $('#editRecommenderModal').modal('hide');
+
+            // SweetAlert2 Success Alert
+            Swal.fire({
+                title: 'Success!',
+                text: response.message,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+    },
+    error: function(xhr) {
+        console.log(xhr.responseText);
+
+        // SweetAlert2 Error Alert
+        Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while updating the recommender.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+});
+
+});

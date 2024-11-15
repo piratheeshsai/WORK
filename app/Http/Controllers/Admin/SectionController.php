@@ -107,20 +107,30 @@ class SectionController extends Controller
 
     }
 
-
     public function updateRecommender(Request $request)
     {
-        $validated = $request->validate([
+        // Validate the input
+        $request->validate([
             'subsection_id' => 'required|exists:subsections,id',
-            'recommender_id' => 'required|exists:users,userID', // Validate against userID
+            'recommender_id' => 'required|exists:users,userID',
         ]);
 
-        $subsection = Subsection::find($validated['subsection_id']);
-        $subsection->recommender_id = $validated['recommender_id'];
+        Log::info('Subsection ID:', ['subsection_id' => $request->subsection_id]);
+        Log::info('Recommender ID:', ['recommender_id' => $request->recommender_id]);
+
+        // Find and update the subsection
+        $subsection = Subsection::findOrFail($request->subsection_id);
+        $subsection->recommender_id = $request->recommender_id;
         $subsection->save();
 
-        return response()->json(['success' => true, 'subsection' => $subsection]);
+        return redirect()->route('admin.sections.index')->with('success', 'Recommender updated successfully.');
+
     }
+
+
+
+
+
 
 
 

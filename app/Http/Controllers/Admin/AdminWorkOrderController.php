@@ -10,9 +10,11 @@ class AdminWorkOrderController extends Controller
 {
     public function index()
 {
-    $workOrders = WorkOrder::where('status', 'approved')->paginate(10);
+    $workOrders = WorkOrder::paginate(5);
     return view('admin.workOrder.index', compact('workOrders'));
 }
+
+
 public function show($workOrder)
 {
 
@@ -20,6 +22,8 @@ public function show($workOrder)
     $workOrder = WorkOrder::findOrFail($decodedId);
     return view('admin.workorder.show', compact('workOrder'));
 }
+
+
 public function destroy($workOrder)
     {
         $decodedId = urldecode($workOrder);

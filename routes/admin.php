@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
    // Define the route in your web.php
   // This is the route that should handle PATCH requests for updating a recommender
-  Route::post('sections/update-recommender', [SectionController::class, 'updateRecommender'])->name('sections.updateRecommender');
+  Route::post('sections/updateRecommender', [SectionController::class, 'updateRecommender'])->name('sections.updateRecommender');
 
 
 
