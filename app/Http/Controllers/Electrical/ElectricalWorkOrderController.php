@@ -23,4 +23,28 @@ class ElectricalWorkOrderController extends Controller
     $workOrder = WorkOrder::findOrFail($decodedId);
     return view('electrical.workorder.show', compact('workOrder'));
 }
+
+
+public function Accept($id)
+{
+    $id = urldecode($id);
+    $workOrder = WorkOrder::findOrFail($id);
+    $workOrder->status = 'Work in Progress';
+    $workOrder->progress = 75;
+    $workOrder->save();
+
+    return redirect()->back()->with('success', 'Work order Accepted successfully.');
+}
+
+public function Complete($id)
+{
+    $id = urldecode($id);
+    $workOrder = WorkOrder::findOrFail($id);
+    $workOrder->status = 'Completed';
+    $workOrder->progress = 100;
+    $workOrder->save();
+
+    return redirect()->back()->with('success', 'Work order completed successfully.');
+}
+
 }

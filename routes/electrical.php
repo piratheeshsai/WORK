@@ -24,4 +24,12 @@ Route::get('workorder/{workOrder}', [ElectricalWorkOrderController::class, 'show
     Route::delete('workorder/{workOrder}', [ElectricalWorkOrderController::class, 'destroy'])->name('workorder.destroy')
     ->where('workOrder', '.*');
 
+    Route::post('workorder/{id}/Accept', [ElectricalWorkOrderController::class, 'Accept'])
+    ->name('workorder.Accept')
+    ->where('id', '.*');
+
+    Route::post('workorder/{id}/Complete', [ElectricalWorkOrderController::class, 'Complete'])
+    ->name('workorder.Complete')
+    ->where('id', '.*');
+
 });

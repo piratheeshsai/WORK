@@ -11,20 +11,58 @@
                             <!-- Push the buttons to the right -->
                             <div class="ms-auto d-flex">
 
+                                {{-- <form action="{{ route('civil.workorder.Accept', urlencode($workOrder->id)) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button class="btn btn-success btn-sm me-2" id="approve-btn">Accept</button>
+                                </form> --}}
+
+                                {{-- <form
+                                    action="{{ route('civil.workorder.' . ($workOrder->status === 'Work in Progress' ? 'Complete' : 'Accept'), urlencode($workOrder->id)) }}"
+                                    method="POST" style="display:inline;">
+                                    @csrf
+                                    <button
+                                        class="btn btn-{{ $workOrder->status === 'Work in Progress' ? 'primary' : 'success' }} btn-sm me-2"
+                                        id="status-btn">
+                                        {{ $workOrder->status === 'Work in Progress' ? 'Complete' : 'Accept' }}
+                                    </button>
+                                </form> --}}
+
+
+                                @if ($workOrder->status === 'Completed')
+                                    <button class="btn btn-secondary btn-sm me-2" id="status-btn" disabled>
+                                        Completed
+                                    </button>
+                                @else
+                                    <form
+                                        action="{{ route('civil.workorder.' . ($workOrder->status === 'Work in Progress' ? 'Complete' : 'Accept'), urlencode($workOrder->id)) }}"
+                                        method="POST" style="display:inline;">
+                                        @csrf
+                                        <button
+                                            class="btn btn-{{ $workOrder->status === 'Work in Progress' ? 'primary' : 'success' }} btn-sm me-2"
+                                            id="status-btn">
+                                            {{ $workOrder->status === 'Work in Progress' ? 'Complete' : 'Accept' }}
+                                        </button>
+                                    </form>
+                                @endif
+
+
+
                                 <!-- Reject Button -->
-                                <form action="{{ route('civil.workorder.destroy',  urlencode($workOrder->id)) }}" method="POST" style="display:inline;">
+                                {{-- <form action="{{ route('civil.workorder.destroy', urlencode($workOrder->id)) }}"
+                                    method="POST" style="display:inline;">
                                     @csrf
                                     <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Delete</button>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                     </div>
 
                     @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     <div class="card">
                         <div class="card-header">
@@ -35,31 +73,35 @@
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Work Type:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->work_type ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->work_type ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Complain:</strong>
-                                        <span class="text-dark text-uppercase">{{ strip_tags($workOrder->complain)}}</span>
+                                        <span class="text-dark text-uppercase">{{ strip_tags($workOrder->complain) }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Priority:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->priority ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->priority ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Created By:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->EmployeeId ?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->EmployeeId ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-3">
                                         <strong class="text-muted">Date:</strong>
-                                        <span class="text-dark text-uppercase">{{ optional($workOrder)->created_at->format('Y-m-d')?? 'Not Updated' }}</span>
+                                        <span
+                                            class="text-dark text-uppercase">{{ optional($workOrder)->created_at->format('Y-m-d') ?? 'Not Updated' }}</span>
                                     </p>
                                 </div>
                                 <!-- Other fields -->
@@ -73,6 +115,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        document.getElementById('approve-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Approve this work order?',
+                showDenyButton: true,
+                confirmButtonText: 'Yes, approve it!',
+                denyButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                } else if (result.isDenied) {
+                    Swal.fire('Action cancelled', '', 'info');
+                }
+            });
+        });
+
 
         // Reject Button Confirmation
         document.getElementById('reject-btn').addEventListener('click', function(event) {

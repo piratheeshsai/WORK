@@ -88,6 +88,7 @@ public function reject($id)
     $id = urldecode($id);
     $workOrder = WorkOrder::findOrFail($id);
     $workOrder->status = 'Rejected';
+    $workOrder->progress = 00;
     $workOrder->save();
 
     return redirect()->back()->with('success', 'Work order rejected successfully.');

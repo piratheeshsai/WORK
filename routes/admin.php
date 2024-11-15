@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
 
+  Route::post('workorder/update-status/{id}', [AdminWorkOrderController::class, 'updateStatus'])
+  ->name('workorder.updateStatus');
 
 
 
