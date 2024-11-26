@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\WorkOrder;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Log;
 
 class AdminWorkOrderController extends Controller
 {
     public function index()
-{
+    {
     $workOrders = WorkOrder::paginate(5);
     return view('admin.workOrder.index', compact('workOrders'));
 }
@@ -64,7 +66,23 @@ public function destroy($workOrder)
     ]);
 }
 
+public function viewWorkOrder($workOrder)
+{
+    $decodedId = urldecode($workOrder);
+    $workOrder = WorkOrder::findOrFail($decodedId);
+    return view('admin.print.workorderprint', compact('workOrder'));
+}
 
+public function downloadWorkOrder($workOrder){
+    $decodedId = urldecode($workOrder);
+    $workOrder = WorkOrder::findOrFail($decodedId);
+    $data = [
+        'workOrder' => $workOrder,
+    ];
+    $todayDate = Carbon::now()->format('d-m-m');
+    $pdf = Pdf::loadView('admin.print.workorderprint', $data);
+    return $pdf->download('Work Order'.$workOrder->id.'-'.$todayDate.'.pdf');
+}
 
 }
 

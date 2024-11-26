@@ -3,7 +3,7 @@
 @section('content')
     <div class="contents">
         <div class="container mt-5">
-            <form action="{{ route('civil.profile.update') }}" method="POST">
+            <form action="{{ route('recommender.profile.update') }}" method="POST">
                 @csrf
 
             @method('PUT')
@@ -64,42 +64,6 @@
                                                 name="EmployeeId"
                                                 value="{{ old('EmployeeId', optional($userDetails)->EmployeeId) }}"
                                                 placeholder="{{ optional($userDetails)->EmployeeId ? '' : 'Enter your Employee Number' }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row gutters">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <h6 class="mt-3 mb-2 text-primary mb-3">Section Details</h6>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                        <label for="section" class="form-label">Section</label>
-                                        <select class="form-select" id="section" name="section" required>
-                                            <option value="" disabled selected>Select Section</option>
-                                            @foreach ($section as $sec)
-                                                <option value="{{ $sec->id }}">{{ $sec->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" id="subsectionsContainer"
-                                        style="display: none;">
-                                        <label for="subsections" class="form-label">Subsection</label>
-                                        <select class="form-select" id="subsections" name="subsection" required>
-                                            <option value="" disabled selected>Select Subsection</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" id="departmentsContainer" style="display: none;">
-                                        <label for="departments" class="form-label">Department</label>
-                                        <select class="form-select" id="departments" name="department">
-                                            <option value="" disabled selected>Select Department</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                        <div class="form-group">
-                                            <label for="section_head">Administrator</label>
-                                            <input type="text" class="form-control" id="section_head"
-                                                placeholder="Administrator" readonly>
                                         </div>
                                     </div>
                                 </div>

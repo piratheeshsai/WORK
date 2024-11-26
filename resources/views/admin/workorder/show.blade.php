@@ -13,13 +13,19 @@
                             <h3 class="mb-0">Work Order Details</h3>
                             <!-- Push the buttons to the right -->
                             <div class="ms-auto d-flex">
-
+                                <form action="{{ route('admin.workorder.view', urlencode($workOrder->id)) }}"
+                                    method="get" style="display:inline;">
+                                    <button class="btn btn-primary btn-sm me-2" id="view">View Work Order</button>
+                                </form>
+                                <form action="{{ route('admin.workorder.print', $workOrder->id) }}" method="get" style="display:inline;">
+                                    <button class="btn btn-warning btn-sm me-2" id="download">Download</button>
+                                </form>                                
                                 <!-- Reject Button -->
                                 <form action="{{ route('admin.workorder.destroy', urlencode($workOrder->id)) }}"
                                     method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-secondary btn-sm me-2" id="reject-btn">Delete</button>
+                                    <button class="btn btn-danger btn-sm me-2" id="reject-btn">Delete</button>
                                 </form>
                             </div>
                         </div>

@@ -49,4 +49,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('workorder', [AdminWorkOrderController::class, 'index'])->name('workorder.index');
     Route::get('workorder/{workOrder}', [AdminWorkOrderController::class, 'show'])->name('workorder.show')->where('workOrder', '.*');
     Route::delete('workorder/{workOrder}', [AdminWorkOrderController::class, 'destroy'])->name('workorder.destroy')->where('workOrder', '.*');
+    Route::get('print/{workOrder}', [AdminWorkOrderController::class, 'viewWorkOrder'])->name('workorder.view')->where('workOrder', '.*');
+    Route::get('print/{workOrder}/print', [AdminWorkOrderController::class, 'downloadWorkOrder'])->name('workorder.print')->where('workOrder', '.*');
 });
