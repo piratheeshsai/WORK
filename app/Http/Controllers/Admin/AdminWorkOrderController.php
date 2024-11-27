@@ -68,20 +68,19 @@ public function destroy($workOrder)
 
 public function viewWorkOrder($workOrder)
 {
-    $decodedId = urldecode($workOrder);
-    $workOrder = WorkOrder::findOrFail($decodedId);
+    $workOrder = WorkOrder::findOrFail($workOrder);
     return view('admin.print.workorderprint', compact('workOrder'));
 }
 
-public function downloadWorkOrder($workOrder){
-    $decodedId = urldecode($workOrder);
-    $workOrder = WorkOrder::findOrFail($decodedId);
+public function downloadWorkOrder($id){
+    $workOrder = WorkOrder::findOrFail($id);
     $data = [
         'workOrder' => $workOrder,
+        'date' => Carbon::now()->format('d-m-Y'),
     ];
-    $todayDate = Carbon::now()->format('d-m-m');
     $pdf = Pdf::loadView('admin.print.workorderprint', $data);
-    return $pdf->download('Work Order'.$workOrder->id.'-'.$todayDate.'.pdf');
+    return $pdf->download('Work.pdf');
+
 }
 
 }
