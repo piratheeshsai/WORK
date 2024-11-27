@@ -68,20 +68,20 @@ public function destroy($workOrder)
 
 public function viewWorkOrder($workOrder)
 {
+
     $workOrder = WorkOrder::findOrFail($workOrder);
     return view('admin.print.workorderprint', compact('workOrder'));
 }
 
-public function downloadWorkOrder($id){
-    $workOrder = WorkOrder::findOrFail($id);
-    $data = [
-        'workOrder' => $workOrder,
-        'date' => Carbon::now()->format('d-m-Y'),
-    ];
-    $pdf = Pdf::loadView('admin.print.workorderprint', $data);
-    return $pdf->download('Work.pdf');
+public function downloadWorkOrder($id) {
+    $decodedId = urldecode($id); // Decode the ID if it contains special characters
+    $workOrder = WorkOrder::findOrFail($decodedId); // Fetch the work order
+    $data = ['workOrder' => $workOrder];
 
+    $pdf = Pdf::loadView('admin.print.workorderprint', $data); // Generate PDF
+    return $pdf->download('Work.pdf'); // Download the PDF
 }
+
 
 }
 

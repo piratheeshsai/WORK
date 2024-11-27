@@ -17,9 +17,15 @@
                                     target="blank"  method="get" style="display:inline;">
                                     <button class="btn btn-primary btn-sm me-2" id="view">View Work Order</button>
                                 </form>
-                                <form action="{{ route('admin.workorder.print', urlencode($workOrder->id)) }}" method="get" target="blank" style="display:inline;">
-                                    <button class="btn btn-warning btn-sm me-2" id="download">Download</button>
-                                </form>                                
+                                <form action="{{ route('admin.workorder.print', ['workOrder' => urlencode($workOrder->id)]) }}"
+                                    method="get"
+                                    target="_blank"
+                                    style="display:inline;">
+                                  <button class="btn btn-warning btn-sm me-2" id="download">Download</button>
+                              </form>
+
+
+
                                 <!-- Reject Button -->
                                 <form action="{{ route('admin.workorder.destroy', urlencode($workOrder->id)) }}"
                                     method="POST" style="display:inline;">

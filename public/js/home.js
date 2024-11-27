@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching subsections:', error));
     });
 
+    
     // Event listener for subsection change
     document.getElementById('subsections').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
