@@ -50,6 +50,103 @@
  @extends('admin.layouts.master')
 
  @section('content')
+ <div class="container-fluid py-4">
+    <div class="row">
+        <!-- Total Work Orders -->
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Work Orders</p>
+                                <h5 class="font-weight-bolder">{{ $totalWorkOrders }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Pending</p>
+                                <h5 class="font-weight-bolder">{{ $pendingCount }}</h5>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" 
+                                         role="progressbar" 
+                                         style="width: {{ $pendingPercentage }}%;" 
+                                         aria-valuenow="{{ $pendingPercentage }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        {{ round($pendingPercentage) }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Progress -->
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">In Progress</p>
+                                <h5 class="font-weight-bolder">{{ $inProgressCount }}</h5>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" 
+                                         role="progressbar" 
+                                         style="width: {{ $inProgressPercentage }}%;" 
+                                         aria-valuenow="{{ $inProgressPercentage }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        {{ round($inProgressPercentage) }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Completed</p>
+                                <h5 class="font-weight-bolder">{{ $completedCount }}</h5>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" 
+                                         role="progressbar" 
+                                         style="width: {{ $completedPercentage }}%;" 
+                                         aria-valuenow="{{ $completedPercentage }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        {{ round($completedPercentage) }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
