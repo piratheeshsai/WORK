@@ -54,15 +54,11 @@
     <div class="row">
         <!-- Total Work Orders -->
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Work Orders</p>
-                                <h5 class="font-weight-bolder">{{ $totalWorkOrders }}</h5>
-                            </div>
-                        </div>
+            <div class="card h-100">
+                <div class="card-body p-3 d-flex flex-column justify-content-between">
+                    <div class="numbers">
+                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Work Orders</p>
+                        <h5 class="font-weight-bolder">{{ $totalWorkOrders }}</h5>
                     </div>
                 </div>
             </div>
