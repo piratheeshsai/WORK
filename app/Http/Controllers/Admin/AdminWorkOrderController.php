@@ -73,14 +73,18 @@ public function viewWorkOrder($workOrder)
     return view('admin.print.workorderprint', compact('workOrder'));
 }
 
-public function downloadWorkOrder($id) {
-    $decodedId = urldecode($id); // Decode the ID if it contains special characters
+public function downloadWorkOrder($workOrder) {
+    $decodedId = urldecode($workOrder); // Decode the ID if it contains special characters
     $workOrder = WorkOrder::findOrFail($decodedId); // Fetch the work order
     $data = ['workOrder' => $workOrder];
 
+    // Sanitize the filename to replace invalid characters
+    $sanitizedId = str_replace(['/', '\\'], '-', $workOrder->id);
+
     $pdf = Pdf::loadView('admin.print.workorderprint', $data); // Generate PDF
-    return $pdf->download('Work.pdf'); // Download the PDF
+    return $pdf->download($sanitizedId . '.pdf'); // Download the PDF
 }
+
 
 
 }

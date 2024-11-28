@@ -50,9 +50,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('workorder/{workOrder}', [AdminWorkOrderController::class, 'show'])->name('workorder.show')->where('workOrder', '.*');
     Route::delete('workorder/{workOrder}', [AdminWorkOrderController::class, 'destroy'])->name('workorder.destroy')->where('workOrder', '.*');
     Route::get('print/{workOrder}', [AdminWorkOrderController::class, 'viewWorkOrder'])->name('workorder.view')->where('workOrder', '.*');
-    Route::get('admin/print/{workOrder}/generate', [AdminWorkOrderController::class, 'downloadWorkOrder'])
-    ->name('workorder.print')
-    ->where('workOrder', '.*'); // Allow special characters in workOrder
+    Route::get('admin/print/{workOrder}/generate', [AdminWorkOrderController::class, 'downloadWorkOrder'])->name('workorder.print')->where('workOrder', '.*'); // Allow special characters in workOrder
 
 
 
