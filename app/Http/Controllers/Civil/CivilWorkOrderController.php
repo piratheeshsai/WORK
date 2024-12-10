@@ -11,8 +11,8 @@ class CivilWorkOrderController extends Controller
     public function index()
     {
         $workOrders = WorkOrder::where('status', 'approved')
-                               ->where('work_type', 'civil')
-                               ->paginate(10);
+                       ->whereIn('work_type', ['civil', 'carpentry', 'other'])
+                       ->paginate(10);
         return view('civil.workOrder.index', compact('workOrders'));
     }
 

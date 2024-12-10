@@ -101,7 +101,7 @@ class WorkOrderController extends Controller
         : 1;
 
     // Format the increment number
-    $incrementFormatted = str_pad($incrementNumber, 3, '0', STR_PAD_LEFT);
+    $incrementFormatted = str_pad($incrementNumber, 4, '0', STR_PAD_LEFT);
 
     // Construct the new work order ID
     $id = "WMD/{$workType}/{$year}/{$incrementFormatted}";

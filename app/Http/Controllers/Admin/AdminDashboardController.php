@@ -4,30 +4,33 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class AdminDashboardController extends Controller
 {
-    public function index():View{
+    public function index(): View
+    {
         $totalWorkOrders = DB::table('work_order')->count();
-        $pendingCount = DB::table('work_order')->where('status', 'Pending')->count();
+        $pendingCount = DB::table('work_order')->where('status', 'Approved')->count();
         $inProgressCount = DB::table('work_order')->where('status', 'In Progress')->count();
         $completedCount = DB::table('work_order')->where('status', 'Completed')->count();
 
-    // Calculate percentages (avoid division by zero)
-        $pendingPercentage = $totalWorkOrders ? ($pendingCount / $totalWorkOrders) * 100 : 0;
-        $inProgressPercentage = $totalWorkOrders ? ($inProgressCount / $totalWorkOrders) * 100 : 0;
-        $completedPercentage = $totalWorkOrders ? ($completedCount / $totalWorkOrders) * 100 : 0;
+        // Chart Data
+        $chart = (new LarapexChart)->pieChart()
+        ->setTitle('Work Order Distribution')
+        ->setLabels(['Pending', 'In Progress', 'Completed'])
+        ->setDataset([$pendingCount, $inProgressCount, $completedCount])
+        ->setHeight(300) // Set height
+        ->setWidth(400); // Set width
 
-    return view('admin.dashboard.index', compact(
-        'totalWorkOrders',
-        'pendingCount',
-        'inProgressCount',
-        'completedCount',
-        'pendingPercentage',
-        'inProgressPercentage',
-        'completedPercentage'
-    ));
+
+        return view('admin.dashboard.index', compact(
+            'totalWorkOrders',
+            'pendingCount',
+            'inProgressCount',
+            'completedCount',
+            'chart'
+        ));
     }
 }
