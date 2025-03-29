@@ -9,7 +9,7 @@
         <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
     </nav>
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center" method="get">
             <div class="input-group">
                 <span class="input-group-text text-body"><i class="fas fa-search"
                         aria-hidden="true"></i></span>
