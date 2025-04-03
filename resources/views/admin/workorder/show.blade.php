@@ -15,13 +15,13 @@
                             <div class="ms-auto d-flex">
                                 <form action="{{ route('admin.workorder.view', urlencode($workOrder->id)) }}"
                                     target="blank"  method="get" style="display:inline;">
-                                    <button class="btn btn-primary btn-sm me-2" id="view">View Work Order</button>
+                                    <button class="btn btn-primary btn-sm me-2" id="view">View</button>
                                 </form>
                                 <form action="{{ route('admin.workorder.print', ['workOrder' => urlencode($workOrder->id)]) }}"
                                     method="get"
                                     target="_blank"
                                     style="display:inline;">
-                                  <button class="btn btn-warning btn-sm me-2" id="download">Download</button>
+                                  <button class="btn btn-warning btn-sm me-2" id="download">Save</button>
                               </form>
 
 
@@ -31,7 +31,7 @@
                                     method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm me-2" id="reject-btn">Delete</button>
+                                    <button class="btn btn-danger btn-sm me-2" id="reject-btn">Remove</button>
                                 </form>
                             </div>
                         </div>
